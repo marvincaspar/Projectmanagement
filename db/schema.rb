@@ -11,7 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131204160014) do
+ActiveRecord::Schema.define(version: 20131209111656) do
+
+  create_table "packages", force: true do |t|
+    t.string   "title"
+    t.integer  "project_id"
+    t.integer  "prev_package_id"
+    t.integer  "employee_id"
+    t.integer  "risk_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "packages", ["employee_id"], name: "index_packages_on_employee_id", using: :btree
+  add_index "packages", ["prev_package_id"], name: "index_packages_on_prev_package_id", using: :btree
+  add_index "packages", ["project_id"], name: "index_packages_on_project_id", using: :btree
+  add_index "packages", ["risk_id"], name: "index_packages_on_risk_id", using: :btree
+
+  create_table "projects", force: true do |t|
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "roles", force: true do |t|
     t.string   "name"

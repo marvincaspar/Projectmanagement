@@ -1,4 +1,8 @@
 Pm::Application.routes.draw do
+  resources :packages
+
+  resources :projects
+
   devise_for :users
   root :to => "home#index"
   get "home/index"

@@ -34,3 +34,6 @@ https://github.com/ryanb/cancan
 		* Ist
 			* tatsächliche Arbeitsstunden
 			* Puffer
+
+
+- Roatmap nur für Grobplanung (hat nichts mit Arbeitspaketen zu tun, ist zeitliche Grobplanung, enthält Meilensteine bzw. Release, Meilensteine enthalten Deliverables)

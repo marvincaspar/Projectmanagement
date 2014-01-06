@@ -11,28 +11,75 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131209111656) do
+ActiveRecord::Schema.define(version: 20140106100417) do
 
-  create_table "packages", force: true do |t|
-    t.string   "title"
-    t.integer  "project_id"
-    t.integer  "prev_package_id"
-    t.integer  "employee_id"
-    t.integer  "risk_id"
+  create_table "attachments", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
   end
 
-  add_index "packages", ["employee_id"], name: "index_packages_on_employee_id", using: :btree
-  add_index "packages", ["prev_package_id"], name: "index_packages_on_prev_package_id", using: :btree
-  add_index "packages", ["project_id"], name: "index_packages_on_project_id", using: :btree
-  add_index "packages", ["risk_id"], name: "index_packages_on_risk_id", using: :btree
+  create_table "attachments_work_packages", id: false, force: true do |t|
+    t.integer "attachment_id",   null: false
+    t.integer "work_package_id", null: false
+  end
+
+  create_table "product_breakdown_structures", force: true do |t|
+    t.string   "name"
+    t.integer  "level"
+    t.integer  "parent"
+    t.integer  "order"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "project_id"
+  end
+
+  add_index "product_breakdown_structures", ["user_id"], name: "index_product_breakdown_structures_on_user_id", using: :btree
 
   create_table "projects", force: true do |t|
-    t.string   "title"
+    t.string   "name"
+    t.text     "description"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "due"
+  end
+
+  create_table "qualifications", force: true do |t|
+    t.string   "name"
+    t.integer  "experience"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "resource_allocation_matrices", force: true do |t|
+    t.integer  "work_package_id"
+    t.integer  "resource_breakdown_structure_id"
+    t.integer  "product_breakdown_structure_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "resource_allocation_matrices", ["work_package_id", "resource_breakdown_structure_id", "product_breakdown_structure_id"], name: "index_resource_allocation_matrices", using: :btree
+
+  create_table "resource_breakdown_structures", force: true do |t|
+    t.integer  "type"
+    t.integer  "role_id"
+    t.integer  "count"
+    t.integer  "qualification_id"
+    t.integer  "amount"
+    t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "resource_breakdown_structures", ["project_id"], name: "index_resource_breakdown_structures_on_project_id", using: :btree
+  add_index "resource_breakdown_structures", ["qualification_id"], name: "index_resource_breakdown_structures_on_qualification_id", using: :btree
+  add_index "resource_breakdown_structures", ["role_id"], name: "index_resource_breakdown_structures_on_role_id", using: :btree
 
   create_table "roles", force: true do |t|
     t.string   "name"
@@ -58,6 +105,14 @@ ActiveRecord::Schema.define(version: 20131209111656) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "firstname"
+    t.string   "lastname"
+    t.string   "title"
+    t.string   "phone"
+    t.string   "mobile"
+    t.string   "department"
+    t.string   "position"
+    t.string   "location"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -69,5 +124,42 @@ ActiveRecord::Schema.define(version: 20131209111656) do
   end
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
+
+  create_table "work_breakdown_structures", force: true do |t|
+    t.string   "name"
+    t.integer  "level"
+    t.integer  "parent"
+    t.integer  "order"
+    t.integer  "type"
+    t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "work_breakdown_structures", ["project_id"], name: "index_work_breakdown_structures_on_project_id", using: :btree
+
+  create_table "work_packages", force: true do |t|
+    t.string   "name"
+    t.integer  "owner_id"
+    t.integer  "released_by_id"
+    t.datetime "released_on"
+    t.text     "description"
+    t.text     "target"
+    t.text     "resources"
+    t.text     "risks"
+    t.integer  "work_breakdown_strukture_id"
+    t.datetime "start"
+    t.datetime "end"
+    t.integer  "cost"
+    t.integer  "parent"
+    t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "work_packages", ["owner_id"], name: "index_work_packages_on_owner_id", using: :btree
+  add_index "work_packages", ["project_id"], name: "index_work_packages_on_project_id", using: :btree
+  add_index "work_packages", ["released_by_id"], name: "index_work_packages_on_released_by_id", using: :btree
+  add_index "work_packages", ["work_breakdown_strukture_id"], name: "index_work_packages_on_work_breakdown_strukture_id", using: :btree
 
 end

@@ -13,6 +13,14 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree .
 //= require bootstrap
+//= require jquery.ui.all
+//= require jquery-sortable
+//= require_tree .
 
+
+jQuery(document).ready(function() {
+  jQuery( ".datepicker" ).datepicker();
+
+  jQuery("ol.sortable").sortable();
+});

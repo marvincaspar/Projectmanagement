@@ -1,0 +1,23 @@
+<ol class="sortable list-group default vertical">
+  <% prev_level = 0 %>
+  <% ProductBreakdownStructure.order_for_selects(params[:id]).each do |p| %>
+    <% if p.level > 0 %>
+
+      <% if prev_level == p.level %>
+        </ol></li>
+      <% end %>
+      <% if prev_level > p.level %>
+        </ol></li>
+        <% diff = prev_level - p.level %>
+        <%= "#{'</ol></li>' * diff}".html_safe %>
+      <% end %>
+
+      <li class="list-group-item">
+        <%= p.name %>
+        <ol data-level="<%=p.level %>">
+
+      <% prev_level = p.level %>
+    <% end %>
+  <% end %>
+  <%= "#{'</ol></li>' * prev_level}".html_safe %>
+</ol>

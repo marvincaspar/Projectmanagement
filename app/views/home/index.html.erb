@@ -1,2 +1,41 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<div class="row">
+  <div class="col-md-6">
+    <h2>Meine Projekte <small>ein kleiner Text</small></h2>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>
+            #
+          </th>
+          <th>
+            Name
+          </th>
+          <th>
+          </th>
+        </tr>
+      </thead>
+      <% current_user.projects.each do |project| %>
+        <tr>
+          <td>
+            <%= project.id %>
+          </td>
+          <td>
+            <%= project.name %>
+          </td>
+          <td>
+            <%= link_to '', project, { class: 'glyphicon glyphicon-eye-open' } %>
+            <%= link_to '', edit_project_path(project), { class: 'glyphicon glyphicon-pencil' } %>
+            <%= link_to '', project, method: :delete, data: { confirm: 'Are you sure?' }, class: 'glyphicon glyphicon-remove' %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+
+    <%= link_to 'Neues Projekt anlegen', new_project_path, class: 'btn btn-primary' %>
+
+    <%= link_to 'Projekt-Setup', new_project_path, class: 'btn btn-success' %>
+  </div>
+  <div class="col-md-6">
+    <h2>Meine Aufgaben <small>ein kleiner Text</small></h2>
+  </div>
+</div>

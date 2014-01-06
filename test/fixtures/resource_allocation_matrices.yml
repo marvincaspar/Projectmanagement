@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  work_package_id: 
+  resource_breakdown_structure_id: 
+  product_breakdown_structure_id: 
+
+two:
+  work_package_id: 
+  resource_breakdown_structure_id: 
+  product_breakdown_structure_id: 

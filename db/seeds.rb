@@ -13,9 +13,5 @@ user1.add_role "user"
 user2 = User.create email: "user2@example.com", password: "password"
 user2.add_role "user"
 
-project1 = Project.create title: 'Test Project'
-
-package1 = Package.create title: '1. Package', project: project1, employee: user1
-package2 = Package.create title: '2. Package', project: project1, employee: user1, prev_package: package1
-package3 = Package.create title: '3. Package', project: project1, employee: user2, prev_package: package1
-package4 = Package.create title: '4. Package', project: project1, employee: user2, prev_package: package3
+project1 = Project.create name: 'Project #1', user: admin
+project2 = Project.create name: 'Project #2', user: user1

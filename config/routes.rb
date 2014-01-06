@@ -1,11 +1,28 @@
-Pm::Application.routes.draw do
-  resources :packages
+Projectmanagement::Application.routes.draw do
+  #scope '(:locale)', :locale => /en|de/ do
+    root :to => "home#index"
+    get "home/index"
 
-  resources :projects
+    # PROJECTS
+    resources :projects do
+      resources :product_breakdown_structures
+    end
 
-  devise_for :users
-  root :to => "home#index"
-  get "home/index"
+    devise_for :users, 
+               :path => "users", 
+               :path_names => { 
+                                :sign_in => 'login', 
+                                :sign_out => 'logout', 
+                                :password => 'secret', 
+                                :confirmation => 'verification', 
+                                :unlock => 'unblock', 
+                                :registration => 'register', 
+                                :sign_up => 'new',
+                                :account_update => 'edit'
+                              }
+    
+  #end
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

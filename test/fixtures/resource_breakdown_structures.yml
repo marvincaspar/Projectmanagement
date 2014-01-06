@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 1
+  role_id: 
+  count: 1
+  qualification_id: 
+  amount: 1
+  project_id: 
+
+two:
+  type: 1
+  role_id: 
+  count: 1
+  qualification_id: 
+  amount: 1
+  project_id: 

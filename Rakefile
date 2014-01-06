@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Pm::Application.load_tasks
+Projectmanagement::Application.load_tasks

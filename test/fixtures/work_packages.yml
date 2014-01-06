@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  owner_id: 
+  released_by_id: 
+  released_on: 2014-01-05 00:34:13
+  description: MyText
+  target: MyText
+  resources: MyText
+  risks: MyText
+  work_breakdown_strukture_id: 
+  start: 2014-01-05 00:34:13
+  end: 2014-01-05 00:34:13
+  cost: 1
+  parent: 1
+  project_id: 
+
+two:
+  name: MyString
+  owner_id: 
+  released_by_id: 
+  released_on: 2014-01-05 00:34:13
+  description: MyText
+  target: MyText
+  resources: MyText
+  risks: MyText
+  work_breakdown_strukture_id: 
+  start: 2014-01-05 00:34:13
+  end: 2014-01-05 00:34:13
+  cost: 1
+  parent: 1
+  project_id: 

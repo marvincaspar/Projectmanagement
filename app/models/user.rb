@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
 
   has_many :projects
   has_many :product_breakdown_structures
+  has_many :work_breakdown_structures
   has_many :work_packages, :foreign_key => 'owner_id'
 
   enumerize :title, in: [:mister, :miss]

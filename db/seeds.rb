@@ -46,3 +46,37 @@ pbs_reifen3 = ProductBreakdownStructure.create name: 'Reifen #3', level: pbs_rad
 pbs_felge3 = ProductBreakdownStructure.create name: 'Felge #3', level: pbs_rad3.level + 1, parent: pbs_rad3.id, order: 0, user: user1, project: auto
 pbs_reifen4 = ProductBreakdownStructure.create name: 'Reifen #4', level: pbs_rad4.level + 1, parent: pbs_rad4.id, order: 0, user: user1, project: auto
 pbs_felge4 = ProductBreakdownStructure.create name: 'Felge #4', level: pbs_rad4.level + 1, parent: pbs_rad4.id, order: 0, user: user1, project: auto
+
+
+
+wbs_pkw = WorkBreakdownStructure.create name: auto.name, level: 0, parent: 0, order: 0, user: user1, project: auto
+
+wbs_karosserie = WorkBreakdownStructure.create name: 'Karosserie', level: wbs_pkw.level + 1, parent: wbs_pkw.id, order: 0, user: user1, project: auto
+wbs_antriebskomplex = WorkBreakdownStructure.create name: 'Antriebskomplex', level: wbs_pkw.level + 1, parent: wbs_pkw.id, order: 0, user: user1, project: auto
+wbs_fahrgestell = WorkBreakdownStructure.create name: 'Fahrgestell', level: wbs_pkw.level + 1, parent: wbs_pkw.id, order: 0, user: user1, project: auto
+
+wbs_kotfluegel = WorkBreakdownStructure.create name: 'Kotflügel', level: wbs_karosserie.level + 1, parent: wbs_karosserie.id, order: 0, user: user1, project: auto
+wbs_motorhaube = WorkBreakdownStructure.create name: 'Motorhaube', level: wbs_karosserie.level + 1, parent: wbs_karosserie.id, order: 0, user: user1, project: auto
+wbs_tuer = WorkBreakdownStructure.create name: 'Tür', level: wbs_karosserie.level + 1, parent: wbs_karosserie.id, order: 0, user: user1, project: auto
+
+wbs_motorblock = WorkBreakdownStructure.create name: 'Motorblock', level: wbs_antriebskomplex.level + 1, parent: wbs_antriebskomplex.id, order: 0, user: user1, project: auto
+wbs_getriebe = WorkBreakdownStructure.create name: 'Getriebe', level: wbs_antriebskomplex.level + 1, parent: wbs_antriebskomplex.id, order: 0, user: user1, project: auto
+
+wbs_vorderachse = WorkBreakdownStructure.create name: 'Vorderachse', level: wbs_fahrgestell.level + 1, parent: wbs_fahrgestell.id, order: 0, user: user1, project: auto
+wbs_hinterachse = WorkBreakdownStructure.create name: 'Hinterachse', level: wbs_fahrgestell.level + 1, parent: wbs_fahrgestell.id, order: 0, user: user1, project: auto
+
+wbs_rad1 = WorkBreakdownStructure.create name: 'Rad #1', level: wbs_vorderachse.level + 1, parent: wbs_vorderachse.id, order: 0, user: user1, project: auto
+wbs_rad2 = WorkBreakdownStructure.create name: 'Rad #2', level: wbs_vorderachse.level + 1, parent: wbs_vorderachse.id, order: 0, user: user1, project: auto
+wbs_rad3 = WorkBreakdownStructure.create name: 'Rad #3', level: wbs_hinterachse.level + 1, parent: wbs_hinterachse.id, order: 0, user: user1, project: auto
+wbs_rad4 = WorkBreakdownStructure.create name: 'Rad #4', level: wbs_hinterachse.level + 1, parent: wbs_hinterachse.id, order: 0, user: user1, project: auto
+
+wbs_reifen1 = WorkBreakdownStructure.create name: 'Reifen #1', level: wbs_rad1.level + 1, parent: wbs_rad1.id, order: 0, user: user1, project: auto
+wbs_felge1 = WorkBreakdownStructure.create name: 'Felge #1', level: wbs_rad1.level + 1, parent: wbs_rad1.id, order: 0, user: user1, project: auto
+wbs_reifen2 = WorkBreakdownStructure.create name: 'Reifen #2', level: wbs_rad2.level + 1, parent: wbs_rad2.id, order: 0, user: user1, project: auto
+wbs_felge2 = WorkBreakdownStructure.create name: 'Felge #2', level: wbs_rad2.level + 1, parent: wbs_rad2.id, order: 0, user: user1, project: auto
+wbs_reifen3 = WorkBreakdownStructure.create name: 'Reifen #3', level: wbs_rad3.level + 1, parent: wbs_rad3.id, order: 0, user: user1, project: auto
+wbs_felge3 = WorkBreakdownStructure.create name: 'Felge #3', level: wbs_rad3.level + 1, parent: wbs_rad3.id, order: 0, user: user1, project: auto
+wbs_reifen4 = WorkBreakdownStructure.create name: 'Reifen #4', level: wbs_rad4.level + 1, parent: wbs_rad4.id, order: 0, user: user1, project: auto
+wbs_felge4 = WorkBreakdownStructure.create name: 'Felge #4', level: wbs_rad4.level + 1, parent: wbs_rad4.id, order: 0, user: user1, project: auto
+
+

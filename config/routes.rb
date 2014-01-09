@@ -6,6 +6,12 @@ Projectmanagement::Application.routes.draw do
     # PROJECTS
     resources :projects do
       resources :product_breakdown_structures
+
+      resources :work_breakdown_structures do
+        collection do
+          post :save_structure
+        end
+      end
     end
 
     devise_for :users, 

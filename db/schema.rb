@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140106100417) do
+ActiveRecord::Schema.define(version: 20140107181855) do
 
   create_table "attachments", force: true do |t|
     t.datetime "created_at"
@@ -134,6 +134,7 @@ ActiveRecord::Schema.define(version: 20140106100417) do
     t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   add_index "work_breakdown_structures", ["project_id"], name: "index_work_breakdown_structures_on_project_id", using: :btree

@@ -1,0 +1,33 @@
+<script type="text/javascript">
+  var wbs_url = '<%= save_structure_project_work_breakdown_structures_path(project_id: params[:id]) %>';
+</script>
+<ul id="org" style="display:none">
+  <% prev_level = 0 %>
+  <% first_turn = true %>
+  <% WorkBreakdownStructure.order_for_selects(params[:id]).each do |p| %>
+    <% if prev_level < p.level %>
+      <ul>
+    <% end %>
+    
+    <% if prev_level > p.level %>
+      </li></ul>
+      <% diff = prev_level - p.level - 1 %>
+      <%= "#{'</li></ul>' * diff} </li>".html_safe %>
+    <% end %>
+
+    <% if prev_level == p.level && !first_turn %>
+      </li>
+    <% end %>
+
+
+    <li id="<%= p.id %>">
+      <%= p.name %>
+
+    <% prev_level = p.level %>
+    <% first_turn = false %>
+  <% end %>
+  <%= "#{'</li></ul>' * prev_level}".html_safe %>
+</ul>            
+<div id="chart" class="orgChart"></div>
+
+<button id="btn_wbs_save">Speichern</button>

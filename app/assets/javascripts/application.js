@@ -16,6 +16,8 @@
 //= require bootstrap
 //= require jquery.ui.all
 //= require jquery-sortable
+//= require jquery.jOrgChart
+//= require prettify
 //= require_tree .
 
 
@@ -23,4 +25,9 @@ jQuery(document).ready(function() {
   jQuery( ".datepicker" ).datepicker();
 
   jQuery("ol.sortable").sortable();
+
+  jQuery("#org").jOrgChart({
+    chartElement : '#chart',
+    dragAndDrop  : true
+  });
 });

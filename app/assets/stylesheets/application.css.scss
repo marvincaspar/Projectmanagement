@@ -11,7 +11,8 @@
  *= require_self
  *= require_tree .
  *= require jquery.ui.all
- *= require jquery.nestable
+ *= require jquery.jOrgChart
+ *= require prettify
  */
 
 @import "bootstrap";

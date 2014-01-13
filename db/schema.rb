@@ -148,7 +148,7 @@ ActiveRecord::Schema.define(version: 20140107181855) do
     t.text     "target"
     t.text     "resources"
     t.text     "risks"
-    t.integer  "work_breakdown_strukture_id"
+    t.integer  "work_breakdown_structure_id"
     t.datetime "start"
     t.datetime "end"
     t.integer  "cost"
@@ -161,6 +161,6 @@ ActiveRecord::Schema.define(version: 20140107181855) do
   add_index "work_packages", ["owner_id"], name: "index_work_packages_on_owner_id", using: :btree
   add_index "work_packages", ["project_id"], name: "index_work_packages_on_project_id", using: :btree
   add_index "work_packages", ["released_by_id"], name: "index_work_packages_on_released_by_id", using: :btree
-  add_index "work_packages", ["work_breakdown_strukture_id"], name: "index_work_packages_on_work_breakdown_strukture_id", using: :btree
+  add_index "work_packages", ["work_breakdown_structure_id"], name: "index_work_packages_on_work_breakdown_structure_id", using: :btree
 
 end

@@ -12,6 +12,12 @@ Projectmanagement::Application.routes.draw do
           post :save_structure
           post :add_element
         end
+
+        resources :work_packages do
+          collection do
+            post :add_element
+          end
+        end
       end
     end
 

@@ -15,6 +15,19 @@ class WorkBreakdownStructuresController < ApplicationController
     end
   end
 
+  def destroy
+    element = WorkBreakdownStructure.find(params["id"])
+    childs = find_childs(element.id)
+    childs.each do |c|
+      c.destroy
+    end
+    element.destroy
+    respond_to do |format|
+      format.html { redirect_to project_path(params["project_id"]) }
+      format.json { head :no_content }
+    end
+  end
+
   def add_element
     parentElement = WorkBreakdownStructure.find(params["id"])
 
@@ -25,4 +38,16 @@ class WorkBreakdownStructuresController < ApplicationController
       format.json  { render :json => msg }
     end
   end
+
+  private
+    # find all the childs to avoid dead entries
+    def find_childs(parent)
+      ret = []
+      el = WorkBreakdownStructure.where('parent = ?', parent)
+      el.each do |e|
+        ret << e
+        ret += find_childs(e.id) 
+      end
+      ret
+    end
 end

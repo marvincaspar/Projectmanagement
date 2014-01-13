@@ -80,7 +80,29 @@ function addWbsElement() {
   return false;
 }
 
+function addWpElement() {
+  var wp_add_url = wp_add_element.replace(':wbs_id', jQuery('#elementId').val());
+  jQuery.ajax({
+    type: 'POST',
+    data: { work_breakdown_structure_id: jQuery('#elementId').val(), 
+            name: jQuery('#wpName').val(), 
+            description: jQuery('#wpDescription').val(),
+            target: jQuery('#wpTarget').val(), 
+            resources: jQuery('#wpResources').val(), 
+            risks: jQuery('#wpRisks').val(), 
+            start: jQuery('#wpStart').val(), 
+            end: jQuery('#wpEnd').val(), 
+            cost: jQuery('#wpCost').val() },
+    url: wp_add_url,
+    dataType : 'json'
+  }).done(function ( data ) {
+    window.location.reload();
+  }).fail(function ( data ) {
+    alert('error');
+  });
+  return false;
+}
+
 function prepareModal(id) {
   jQuery('#elementId').val(id);
-
 }

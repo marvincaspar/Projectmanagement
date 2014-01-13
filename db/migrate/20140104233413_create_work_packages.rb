@@ -9,7 +9,7 @@ class CreateWorkPackages < ActiveRecord::Migration
       t.text :target
       t.text :resources
       t.text :risks
-      t.references :work_breakdown_strukture, index: true
+      t.references :work_breakdown_structure, index: true
       t.datetime :start
       t.datetime :end
       t.integer :cost

@@ -1,6 +1,7 @@
 <script type="text/javascript">
   var wbs_save_structure = '<%= save_structure_project_work_breakdown_structures_path(project_id: params[:id]) %>';
   var wbs_add_element = '<%= add_element_project_work_breakdown_structures_path(project_id: params[:id]) %>';
+  var wp_add_element = '<%= add_element_project_work_breakdown_structure_work_packages_path(project_id: params[:id], work_breakdown_structure_id: ":wbs_id") %>';
 </script>
 <ul id="org" style="display:none">
   <% prev_level = 0 %>
@@ -23,8 +24,12 @@
 
     <li id="<%= p.id %>">
       <%= p.name %>
+      <span class="badge"><%= p.work_packages.count %></span>
       <br />
+      <a class="glyphicon glyphicon-file" data-id="<%= p.id %>" data-toggle="modal" data-target="#WpElement"></a>
       <a class="glyphicon glyphicon-plus" data-id="<%= p.id %>" data-toggle="modal" data-target="#WbsElement"></a>
+      <%= link_to '', project_work_breakdown_structure_path(params[:id], p.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'glyphicon glyphicon-minus' %>
+      <span class="glyphicon glyphicon-chevron-up toggle-view"></span>
 
     <% prev_level = p.level %>
     <% first_turn = false %>
@@ -37,24 +42,57 @@
 
 
 <!-- Modal -->
+<input type="hidden" id="elementId">
 <div class="modal fade" id="WbsElement" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        <h4 class="modal-title" id="myModalLabel">WBS hinzufügen</h4>
       </div>
       <div class="modal-body">
-        <input type="hidden" id="elementId">
         <input type="text" id="elementName">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" onclick="addWbsElement();">Save changes</button>
       </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="WpElement" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">WP hinzufügen</h4>
+      </div>
+      <div class="modal-body">
+        Name: 
+        <input type="text" id="wpName"> <br/>
+        Description: 
+        <input type="text" id="wpDescription"> <br/>
+        Target: 
+        <input type="text" id="wpTarget"> <br/>
+        Resources: 
+        <input type="text" id="wpResources"> <br/>
+        Risks: 
+        <input type="text" id="wpRisks"> <br/>
+        Start: 
+        <input type="text" id="wpStart"> <br/>
+        End: 
+        <input type="text" id="wpEnd"> <br/>
+        Cost: 
+        <input type="text" id="wpCost"> <br/>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="addWpElement();">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script type="text/javascript">
   jQuery(document).ready(function() {

@@ -1,5 +1,6 @@
 <script type="text/javascript">
-  var wbs_url = '<%= save_structure_project_work_breakdown_structures_path(project_id: params[:id]) %>';
+  var wbs_save_structure = '<%= save_structure_project_work_breakdown_structures_path(project_id: params[:id]) %>';
+  var wbs_add_element = '<%= add_element_project_work_breakdown_structures_path(project_id: params[:id]) %>';
 </script>
 <ul id="org" style="display:none">
   <% prev_level = 0 %>
@@ -22,6 +23,8 @@
 
     <li id="<%= p.id %>">
       <%= p.name %>
+      <br />
+      <a class="glyphicon glyphicon-plus" data-id="<%= p.id %>" data-toggle="modal" data-target="#WbsElement"></a>
 
     <% prev_level = p.level %>
     <% first_turn = false %>
@@ -31,3 +34,33 @@
 <div id="chart" class="orgChart"></div>
 
 <button id="btn_wbs_save">Speichern</button>
+
+
+<!-- Modal -->
+<div class="modal fade" id="WbsElement" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="elementId">
+        <input type="text" id="elementName">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="addWbsElement();">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script type="text/javascript">
+  jQuery(document).ready(function() {
+    jQuery('.node a').click(function(e) {
+      console.log(jQuery(this));
+      prepareModal(jQuery(this).data('id'));
+    });
+  });
+</script>

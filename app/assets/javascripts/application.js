@@ -17,7 +17,6 @@
 //= require jquery.ui.all
 //= require jquery-sortable
 //= require jquery.jOrgChart
-//= require prettify
 //= require_tree .
 
 

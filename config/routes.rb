@@ -10,6 +10,7 @@ Projectmanagement::Application.routes.draw do
       resources :work_breakdown_structures do
         collection do
           post :save_structure
+          post :add_element
         end
       end
     end

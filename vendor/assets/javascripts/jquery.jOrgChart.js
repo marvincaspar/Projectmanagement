@@ -136,26 +136,26 @@
 
         // Expand and contract nodes
         if ($childNodes.length > 0) {
-            $nodeDiv.click(function() {
-                var $this = $(this);
-                var $tr = $this.closest("tr");
+            // $nodeDiv.click(function() {
+            //     var $this = $(this);
+            //     var $tr = $this.closest("tr");
 
-                if ($tr.hasClass('contracted')) {
-                    $this.css('cursor', 'n-resize');
-                    $tr.removeClass('contracted').addClass('expanded');
-                    $tr.nextAll("tr").css('visibility', '');
+            //     if ($tr.hasClass('contracted')) {
+            //         $this.css('cursor', 'n-resize');
+            //         $tr.removeClass('contracted').addClass('expanded');
+            //         $tr.nextAll("tr").css('visibility', '');
 
-                    // Update the <li> appropriately so that if the tree redraws collapsed/non-collapsed nodes
-                    // maintain their appearance
-                    $node.removeClass('collapsed');
-                } else {
-                    $this.css('cursor', 's-resize');
-                    $tr.removeClass('expanded').addClass('contracted');
-                    $tr.nextAll("tr").css('visibility', 'hidden');
+            //         // Update the <li> appropriately so that if the tree redraws collapsed/non-collapsed nodes
+            //         // maintain their appearance
+            //         $node.removeClass('collapsed');
+            //     } else {
+            //         $this.css('cursor', 's-resize');
+            //         $tr.removeClass('expanded').addClass('contracted');
+            //         $tr.nextAll("tr").css('visibility', 'hidden');
 
-                    $node.addClass('collapsed');
-                }
-            });
+            //         $node.addClass('collapsed');
+            //     }
+            // });
         }
 
         $nodeCell.append($nodeDiv);
@@ -228,8 +228,12 @@
 
         /* Prevent trees collapsing if a link inside a node is clicked */
         $nodeDiv.children('a').click(function(e) {
-            console.log(e);
-            e.stopPropagation();
+            // console.log(e);
+            // //e.preventDefault();
+            // $nodeDiv.click();
+            // prepareModal(jQuery(this).data('id'));
+            // //e.stopPropagation();
+            prepareModal(jQuery(this).data('id'));
         });
     };
 

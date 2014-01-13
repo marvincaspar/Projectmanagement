@@ -51,7 +51,7 @@ jQuery(document).ready(function() {
     jQuery.ajax({
       type: 'POST',
       data: { wbs: JSON.stringify(step(jQuery('#org'), depth)) },
-      url: wbs_url,
+      url: wbs_save_structure,
       success: function(data) {
         alert("ok");
         console.log(data);
@@ -65,3 +65,22 @@ jQuery(document).ready(function() {
   });
 
 });
+
+function addWbsElement() {
+  jQuery.ajax({
+    type: 'POST',
+    data: { id: jQuery('#elementId').val(), name: jQuery('#elementName').val() },
+    url: wbs_add_element,
+    dataType : 'json'
+  }).done(function ( data ) {
+    window.location.reload();
+  }).fail(function ( data ) {
+    alert('error');
+  });
+  return false;
+}
+
+function prepareModal(id) {
+  jQuery('#elementId').val(id);
+
+}

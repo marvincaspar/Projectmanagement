@@ -23,6 +23,18 @@ class ProductBreakdownStructuresController < ApplicationController
     end
   end
 
+  def destroy
+    childs = find_childs(@project.id)
+    childs.each do |c|
+      c.destroy
+    end
+    @project.destroy
+    respond_to do |format|
+      format.html { redirect_to project_show_path }
+      format.json { head :no_content }
+    end
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -33,5 +45,16 @@ class ProductBreakdownStructuresController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_breakdown_structure_params
       params.require(:product_breakdown_structure).permit(:name, :parent, :user_id, :order, :level, :project_id)
+    end
+
+    # find all the childs to avoid dead entries
+    def find_childs(parent)
+      ret = []
+      el = ProductBreakdownStructure.where('parent = ?', parent)
+      el.each do |e|
+        ret << e
+        ret += find_childs(e.id) 
+      end
+      ret
     end
 end

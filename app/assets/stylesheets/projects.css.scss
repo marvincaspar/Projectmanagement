@@ -1,3 +1,44 @@
 // Place all the styles related to the Projects controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.sortable li > ol li{
+  border-right:0;
+}
+
+.sortable + ol li{
+  margin-right: 0;
+  padding-right: 0;
+}
+
+.sortable-list-name{
+  font-weight:bold;
+  font-size:+1;
+}
+
+.sortable-list-icons{
+  margin-right: 10px;
+}
+
+.sortable, .sortable ol{
+  display:table;
+  width:100%;
+  margin:0;
+  padding:0;
+}
+ol.sortable li{
+  margin: 0 0 0 5px;
+  padding: 0 0 0 5px;
+  border-bottom: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+ol.sortable li:first-child{
+  border-top-right-radius: 0;
+}
+ol.sortable li:last-child {
+  border-bottom-left-radius: 0;
+}
+.sortable > li.list-group-item:last-child{
+  border-bottom: 1px solid #DDDDDD;
+  border-bottom-left-radius: 4px;
+}

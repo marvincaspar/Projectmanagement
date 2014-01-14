@@ -1,6 +1,7 @@
 <script type="text/javascript">
   var wbs_save_structure = '<%= save_structure_project_work_breakdown_structures_path(project_id: params[:id]) %>';
   var wbs_add_element = '<%= add_element_project_work_breakdown_structures_path(project_id: params[:id]) %>';
+  var wbs_get_object = '<%= get_object_project_work_breakdown_structures_path(project_id: params[:id], work_breakdown_structure_id: ":wbs_id") %>';
   var wp_add_element = '<%= add_element_project_work_breakdown_structure_work_packages_path(project_id: params[:id], work_breakdown_structure_id: ":wbs_id") %>';
 </script>
 <ul id="org" style="display:none">
@@ -26,11 +27,20 @@
       <%= p.name %>
       <span class="badge"><%= p.work_packages.count %></span>
       <br />
-      <a class="glyphicon glyphicon-file" data-id="<%= p.id %>" data-toggle="modal" data-target="#WpElement"></a>
-      <a class="glyphicon glyphicon-plus" data-id="<%= p.id %>" data-toggle="modal" data-target="#WbsElement"></a>
+      <a class="glyphicon glyphicon-eye-open" data-id="<%= p.id %>" onclick="showInfo(<%= p.id %>);"></a>
+      <a class="glyphicon glyphicon-file" data-id="<%= p.id %>" data-toggle="modal" data-target="#wpElement"></a>
+      <a class="glyphicon glyphicon-plus" data-id="<%= p.id %>" data-toggle="modal" data-target="#wbsElement"></a>
       <%= link_to '', project_work_breakdown_structure_path(params[:id], p.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'glyphicon glyphicon-minus' %>
       <span class="glyphicon glyphicon-chevron-up toggle-view"></span>
-
+      <!--<% if p.work_packages.count > 0 %>
+        <ul>
+          <% p.work_packages.each do |wp| %>
+            <li id="<%= wp.id %>">
+              <%= wp.name %>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>-->
     <% prev_level = p.level %>
     <% first_turn = false %>
   <% end %>
@@ -43,7 +53,7 @@
 
 <!-- Modal -->
 <input type="hidden" id="elementId">
-<div class="modal fade" id="WbsElement" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="wbsElement" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -51,6 +61,7 @@
         <h4 class="modal-title" id="myModalLabel">WBS hinzufügen</h4>
       </div>
       <div class="modal-body">
+        name
         <input type="text" id="elementName">
       </div>
       <div class="modal-footer">
@@ -61,7 +72,23 @@
   </div>
 </div>
 
-<div class="modal fade" id="WpElement" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="wbsShowInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="wbsShowInfoTitle">Info</h4>
+      </div>
+      <div class="modal-body" id="wbsShowInfoBody">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="wpElement" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">

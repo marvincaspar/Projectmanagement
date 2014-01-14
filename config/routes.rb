@@ -11,6 +11,7 @@ Projectmanagement::Application.routes.draw do
         collection do
           post :save_structure
           post :add_element
+          post :get_object
         end
 
         resources :work_packages do

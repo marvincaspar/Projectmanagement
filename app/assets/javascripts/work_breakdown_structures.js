@@ -106,3 +106,35 @@ function addWpElement() {
 function prepareModal(id) {
   jQuery('#elementId').val(id);
 }
+
+function showInfo(id) {
+  jQuery.ajax({
+    type: 'POST',
+    data: { id: id },
+    url: wbs_get_object,
+    dataType : 'json'
+  }).done(function ( data ) {
+    jQuery('#wbsShowInfoTitle').text('Arbeitspakete für: ' + data.name);
+    //jQuery("#wbsShowInfoBody").append('<h2>Arbeitspakete</h2>');
+    jQuery.each(data.work_packages, function(key, value){
+      jQuery("#wbsShowInfoBody").append('<h3 id="' + value.id + '">' + value.name + '</h3>');
+      var info = '';
+      info += '<h3><small>Beschreibung</small></h3>';
+      info += '<div>' + value.description + '</div>';
+      info += '<h3><small>Ziel</small></h3>';
+      info += '<div>' + value.target + '</div>';
+      info += '<h3><small>Resourcen</small></h3>';
+      info += '<div>' + value.resources + '</div>'
+      jQuery("#wbsShowInfoBody").append('<div>' + info + '</div>');
+    });
+    jQuery("#wbsShowInfoBody").accordion({
+      heightStyle: "content"
+    });
+    jQuery('#wbsShowInfo').modal('show').on('hidden.bs.modal', function (e) {
+      jQuery("#wbsShowInfoBody").accordion("destroy").empty();
+    });
+  }).fail(function ( data ) {
+    alert('error');
+  });
+  return false;
+}

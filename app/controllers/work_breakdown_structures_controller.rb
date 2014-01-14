@@ -15,6 +15,14 @@ class WorkBreakdownStructuresController < ApplicationController
     end
   end
 
+  def get_object
+    wbs = WorkBreakdownStructure.find(params[:id])
+
+    respond_to do |format|
+      format.json { render json: wbs.to_json(:include => :work_packages) }
+    end
+  end
+
   def destroy
     element = WorkBreakdownStructure.find(params["id"])
     childs = find_childs(element.id)

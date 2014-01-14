@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 20140107181855) do
 
   create_table "qualifications", force: true do |t|
     t.string   "name"
-    t.integer  "experience"
+    t.string  "experience"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -67,8 +67,8 @@ ActiveRecord::Schema.define(version: 20140107181855) do
   add_index "resource_allocation_matrices", ["work_package_id", "resource_breakdown_structure_id", "product_breakdown_structure_id"], name: "index_resource_allocation_matrices", using: :btree
 
   create_table "resource_breakdown_structures", force: true do |t|
-    t.integer  "type"
-    t.integer  "role_id"
+    t.integer  "resource_type"
+    t.string  "role"
     t.integer  "count"
     t.integer  "qualification_id"
     t.integer  "amount"
@@ -79,7 +79,6 @@ ActiveRecord::Schema.define(version: 20140107181855) do
 
   add_index "resource_breakdown_structures", ["project_id"], name: "index_resource_breakdown_structures_on_project_id", using: :btree
   add_index "resource_breakdown_structures", ["qualification_id"], name: "index_resource_breakdown_structures_on_qualification_id", using: :btree
-  add_index "resource_breakdown_structures", ["role_id"], name: "index_resource_breakdown_structures_on_role_id", using: :btree
 
   create_table "roles", force: true do |t|
     t.string   "name"

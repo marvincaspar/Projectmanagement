@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 print "Create User"
 # ============ User ============
 admin = User.create email: "admin@example.com", password: "password"
@@ -178,3 +180,43 @@ wp_04 = WorkPackage.create name: 'Komponentenentwurf', parent: wp_02.id, start: 
 wp_05 = WorkPackage.create name: 'Komponententest', parent: wp_02.id, start: Date.today, end: Date.today + 3, cost: 100, work_breakdown_structure_id: wbs_felge4.id, project: auto, owner: user1, risks: 'Low', description: 'Lorem ipsum dolor sit amet,...', resources: 'Lorem ipsum dolor sit amet,...', target: 'Lorem ipsum dolor sit amet,...'
 wp_06 = WorkPackage.create name: 'Implementierungstest', parent: wp_02.id, start: Date.today, end: Date.today + 3, cost: 100, work_breakdown_structure_id: wbs_felge4.id, project: auto, owner: user1, risks: 'Low', description: 'Lorem ipsum dolor sit amet,...', resources: 'Lorem ipsum dolor sit amet,...', target: 'Lorem ipsum dolor sit amet,...'
 puts " done"
+
+
+print "Create Qualification"
+# ============ Qualification ============
+pmp = Qualification.create name: 'PMP', experience: '> 3 Jahre Projektleiter'
+pmc = Qualification.create name: 'Project Management Certificate', experience: 'Junior'
+bac = Qualification.create name: 'Business Analyst Certificate', experience: '> 3 Jahre Product Manager'
+sac = Qualification.create name: 'System Analyst Certificate', experience: '> 3 Jahre Software Engineering'
+sec200 = Qualification.create name: 'Level 200 Software Engineer Certificate', experience: ''
+sec300 = Qualification.create name: 'Level 300 Software Engineer Certificate', experience: '> 3 Jahre'
+sec400 = Qualification.create name: 'Level 400 Software Engineer Certificate', experience: '> 6 Jahre'
+dec200 = Qualification.create name: 'Level 200 Database Engineer Certificate', experience: ''
+dec300 = Qualification.create name: 'Level 300 Database Engineer Certificate', experience: '> 3 Jahre'
+nac200 = Qualification.create name: 'Level 200 Network Admin Certificate', experience: ''
+nac300 = Qualification.create name: 'Level 300 Network Admin Certificate', experience: '> 3 Jahre'
+dcoc300 = Qualification.create name: 'Level 300 Data Center Ops Certificate', experience: '> 3 Jahre'
+dcoc400 = Qualification.create name: 'Level 400 Data Center Ops Certificate', experience: '> 6 Jahre'
+puts " done"
+
+
+print "Create Resource Breakdown Structure"
+# ============ Resource Breakdown Structure ============
+rbs = ResourceBreakdownStructure.create resource_type: :personal_intern, role: "Projektleiter", qualification: pmp, count: 1, amount: 100, project: auto
+rbs = ResourceBreakdownStructure.create resource_type: :personal_intern, role: "Projektcontroller", qualification: pmc, count: 1, amount: 100, project: auto
+rbs = ResourceBreakdownStructure.create resource_type: :personal_intern, role: "Geschäftsanalytiker", qualification: bac, count: 1, amount: 100, project: auto
+rbs = ResourceBreakdownStructure.create resource_type: :personal_intern, role: "Systemanalytiker", qualification: sac, count: 1, amount: 100, project: auto
+
+rbs = ResourceBreakdownStructure.create resource_type: :personal_extern, role: "Entwicklungsleiter", qualification: sec400, count: 1, amount: 100, project: auto
+rbs = ResourceBreakdownStructure.create resource_type: :personal_extern, role: "Technischer Architekt", qualification: sec400, count: 1, amount: 100, project: auto
+rbs = ResourceBreakdownStructure.create resource_type: :personal_extern, role: "Datenbankentwickler", qualification: dec200, count: 2, amount: 100, project: auto
+rbs = ResourceBreakdownStructure.create resource_type: :personal_extern, role: "Datenbankentwickler", qualification: dec300, count: 2, amount: 100, project: auto
+rbs = ResourceBreakdownStructure.create resource_type: :personal_extern, role: "Sofwareentwickler", qualification: sec200, count: 1, amount: 100, project: auto
+rbs = ResourceBreakdownStructure.create resource_type: :personal_extern, role: "Sofwareentwickler", qualification: sec300, count: 3, amount: 100, project: auto
+rbs = ResourceBreakdownStructure.create resource_type: :personal_extern, role: "Sofwareentwickler", qualification: sec300, count: 3, amount: 100, project: auto
+rbs = ResourceBreakdownStructure.create resource_type: :personal_extern, role: "Netzwerkentwickler", qualification: nac200, count: 1, amount: 100, project: auto
+rbs = ResourceBreakdownStructure.create resource_type: :personal_extern, role: "Netzwerkentwickler", qualification: nac300, count: 1, amount: 100, project: auto
+rbs = ResourceBreakdownStructure.create resource_type: :personal_extern, role: "Operator", qualification: dcoc300, count: 1, amount: 100, project: auto
+rbs = ResourceBreakdownStructure.create resource_type: :personal_extern, role: "Operator", qualification: dcoc400, count: 1, amount: 100, project: auto
+puts " done"
+

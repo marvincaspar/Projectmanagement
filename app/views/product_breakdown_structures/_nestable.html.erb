@@ -1,0 +1,41 @@
+<script type="text/javascript">
+  var pbs_show_url = "<%= project_product_breakdown_structure_path(project_id: params[:project_id], id: ':psb_id') %>";
+</script>
+<div class="dd pbs">
+  <ul class="dd-list">
+    <% prev_level = 0 %>
+    <% first_turn = true %>
+    <% ProductBreakdownStructure.order_for_selects(params[:project_id]).each do |p| %>
+      <% if p.level > 0 %>
+        <% if prev_level < p.level %>
+          <ul class="dd-list">
+        <% end %>
+        
+        <% if prev_level > p.level %>
+          </li></ul>
+          <% diff = prev_level - p.level - 1 %>
+          <%= "#{'</li></ul>' * diff} </li>".html_safe %>
+        <% end %>
+
+        <% if prev_level == p.level && !first_turn %>
+          </li>
+        <% end %>
+
+        <li class="dd-item" data-id="<%= p.id %>">
+          <div class="dd-handle dd-handle"></div>
+          <div class="dd-content">
+            <%= p.name %>
+            <div class="pull-right">
+              <span class="glyphicon glyphicon-plus-sign"></span>
+              <span class="glyphicon glyphicon-eye-open"></span>
+              <%= link_to '', project_product_breakdown_structure_path(project_id: params[:project_id], id: p.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'glyphicon glyphicon-trash' %>
+            </div>
+          </div>
+
+        <% prev_level = p.level %>
+        <% first_turn = false %>
+      <% end %>
+    <% end %>
+    <%= "#{'</li></ul>' * prev_level}".html_safe %>
+  </ul>            
+</div>

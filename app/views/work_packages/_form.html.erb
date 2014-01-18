@@ -1,0 +1,83 @@
+<%#= form_for([@project, @work_breakdown_structure, @work_package], html: { class: 'form-horizontal wbs' }) do |f| %>
+<%= form_for([@project, @work_package], html: { class: 'form-horizontal wp' }) do |f| %>
+  <% if @work_breakdown_structure.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@work_package.errors.count, "error") %> prohibited this work_package from being saved:</h2>
+
+      <ul>
+      <% @work_package.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name, class: 'col-md-3 control-label' %>
+    <div class="col-md-9">
+      <%= f.text_field :name, {class: 'form-control', placeholder: 'Name'} %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :work_breakdown_structure, class: 'col-md-3 control-label' %>
+    <div class="col-md-9">
+      <%= select_tag :work_breakdown_structure_id, options_from_collection_for_select(WorkBreakdownStructure.order_for_selects(params[:project_id]), "id", :name_for_selects), { class: 'form-control' } %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :start, class: 'col-md-3 control-label' %>
+    <div class="col-md-9">
+      <%= f.text_field :start, {class: 'form-control datepicker', placeholder: 'Start-Datum'} %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :end, class: 'col-md-3 control-label' %>
+    <div class="col-md-9">
+      <%= f.text_field :end, {class: 'form-control datepicker', placeholder: 'End-Datum'} %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :description, class: 'col-md-3 control-label' %>
+    <div class="col-md-9">
+      <%= f.text_area :description, {class: 'form-control', placeholder: 'Beschreibung'} %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :target, class: 'col-md-3 control-label' %>
+    <div class="col-md-9">
+      <%= f.text_area :target, {class: 'form-control', placeholder: 'Ziel'} %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :resources, class: 'col-md-3 control-label' %>
+    <div class="col-md-9">
+      <%= f.text_area :resources, {class: 'form-control', placeholder: 'Resourcen'} %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :risk, class: 'col-md-3 control-label' %>
+    <div class="col-md-9">
+      <%= f.select :risk, WorkPackage.risk.options, {}, {class: 'form-control'} %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :cost, class: 'col-md-3 control-label' %>
+    <div class="col-md-9">
+      <%= f.text_field :cost, {class: 'form-control', placeholder: 'Kosten'} %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-3 col-sm-9">
+      <%= f.submit class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>

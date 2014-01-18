@@ -5,7 +5,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @product_breakdown_structure = ProductBreakdownStructure.new
+    @work_breakdown_structure = WorkBreakdownStructure.new
   end
 
   def new
@@ -46,6 +46,11 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
+    ProductBreakdownStructure.find("project_id = ? ", @project.id).destroy
+    WorkPackage.find("project_id = ?", @project.id).destroy
+    WorkBreakdownStructure.find("project_id = ?", @project.id).destroy
+    ResourceBreakdownStructure.find("project_id = ?", @project.id).destroy
+
     @project.destroy
     respond_to do |format|
       format.html { redirect_to root_path }

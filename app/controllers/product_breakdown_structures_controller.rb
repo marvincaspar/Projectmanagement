@@ -1,8 +1,15 @@
 class ProductBreakdownStructuresController < ApplicationController
   before_action :set_product_breakdown_structure, only: [:show, :edit, :update, :destroy]
-
-  def new
-    @product_breakdown_structure = ProductBreakdownStructure.new
+  
+  def index
+    @project = Project.find(params[:project_id])
+    @product_breakdown_structure = ProductBreakdownStructure.new(project: @project)
+  end
+  
+  def show
+    respond_to do |format|
+      format.json { render json: @product_breakdown_structure }
+    end
   end
 
   def create 
@@ -14,23 +21,23 @@ class ProductBreakdownStructuresController < ApplicationController
 
     respond_to do |format|
       if @product_breakdown_structure.save
-        format.html { redirect_to project_path(@product_breakdown_structure.project), notice: 'PBS was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @project }
+        format.html { redirect_to project_product_breakdown_structures_path, notice: 'PBS was successfully created.' }
+        format.json { render action: 'show', status: :created, location: @product_breakdown_structure }
       else
         format.html { render action: 'new' }
-        format.json { render json: @product_breakdown_structure.project.errors, status: :unprocessable_entity }
+        format.json { render json: @product_breakdown_structure.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def destroy
-    childs = find_childs(@project.id)
+    childs = find_childs(@product_breakdown_structure.id)
     childs.each do |c|
       c.destroy
     end
-    @project.destroy
+    @product_breakdown_structure.destroy
     respond_to do |format|
-      format.html { redirect_to project_show_path }
+      format.html { redirect_to project_product_breakdown_structures_path }
       format.json { head :no_content }
     end
   end
@@ -39,7 +46,7 @@ class ProductBreakdownStructuresController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product_breakdown_structure
-      @project = ProductBreakdownStructure.find(params[:id])
+      @product_breakdown_structure = ProductBreakdownStructure.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

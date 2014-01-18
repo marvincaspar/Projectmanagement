@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col-md-6">
+    <h2>Arbeitsstruktur</h2>
+    <span class="btn btn-primary btn-sm show_form">Neue Arbeitsstruktur</span>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <%= render "nestable" %>
+  </div>
+  <div class="col-md-6">
+    <div id="wbs_show">
+      <%= render "show" %>
+    </div>
+    <div id="wp_show">
+      <%= render "work_packages/show" %>
+    </div>
+
+    <div id="form">
+      <ul class="nav nav-tabs">
+        <li class="active">
+          <a href="#wbs_form" data-toggle="tab">Arbeitsstruktur</a>
+        </li>
+        <li>
+          <a href="#wp_form" data-toggle="tab">Arbeitspaket</a>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="wbs_form">
+          <%= render "form" %>
+        </div>
+        <div class="tab-pane" id="wp_form">
+          <%= render "work_packages/form" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

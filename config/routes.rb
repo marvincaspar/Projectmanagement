@@ -10,16 +10,22 @@ Projectmanagement::Application.routes.draw do
       resources :work_breakdown_structures do
         collection do
           post :save_structure
-          post :add_element
-          post :get_object
+
+          resources :work_packages, only: [:create]
         end
 
-        resources :work_packages do
-          collection do
-            post :add_element
-          end
-        end
+        resources :work_packages, only: [:show, :update, :destroy]
       end
+
+      resources :resource_breakdown_structures do
+        collection do
+          resources :resources, only: [:create]
+        end
+
+        resources :resources, only: [:show, :update, :destroy]
+      end
+
+      resources :qualifications, only: [:create]
     end
 
     devise_for :users, 

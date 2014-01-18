@@ -59,10 +59,59 @@
     </div><!-- /.navbar-collapse -->
   </nav>
 
+  <% if params[:controller] == 'projects' || params[:project_id].present? %>
+    <% 
+      project_id = nil
+      if params[:project_id].present? 
+        project_id = params[:project_id]
+      else
+        project_id = params[:id]
+      end
+    %>
+
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <%= link_to 'PM-Tool', root_path, {class: 'navbar-brand'} %>
+          </div>
+
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li>
+                <%= link_to 'Übersicht', project_path(project_id) %>
+              </li>
+              <li>
+                <%= link_to 'Projektstruktur', project_product_breakdown_structures_path(project_id) %>
+              </li>
+              <li>
+                <%= link_to 'Arbeitspakete', project_work_breakdown_structures_path(project_id) %>
+              </li>
+              <li>
+                <%= link_to 'Einsatzmittel', project_resource_breakdown_structures_path(project_id) %>
+              </li>
+              <li><a href="#">Allokation</a></li>
+              <li><a href="#">Roundmap</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+  <% end %>
+
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
   
-  <%= yield %>
-
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <%= yield %>
+    </div>
+  </div>
 </body>
 </html>

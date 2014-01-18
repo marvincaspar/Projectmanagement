@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140107181855) do
+ActiveRecord::Schema.define(version: 20140116172647) do
 
   create_table "attachments", force: true do |t|
     t.datetime "created_at"
@@ -51,10 +51,15 @@ ActiveRecord::Schema.define(version: 20140107181855) do
 
   create_table "qualifications", force: true do |t|
     t.string   "name"
-    t.string  "experience"
+    t.string   "experience"
+    t.integer  "project_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "qualifications", ["project_id"], name: "index_qualifications_on_project_id", using: :btree
+  add_index "qualifications", ["user_id"], name: "index_qualifications_on_user_id", using: :btree
 
   create_table "resource_allocation_matrices", force: true do |t|
     t.integer  "work_package_id"
@@ -67,18 +72,36 @@ ActiveRecord::Schema.define(version: 20140107181855) do
   add_index "resource_allocation_matrices", ["work_package_id", "resource_breakdown_structure_id", "product_breakdown_structure_id"], name: "index_resource_allocation_matrices", using: :btree
 
   create_table "resource_breakdown_structures", force: true do |t|
-    t.integer  "resource_type"
-    t.string  "role"
-    t.integer  "count"
-    t.integer  "qualification_id"
-    t.integer  "amount"
-    t.integer  "project_id"
+    t.string "name"
+    t.integer "level"
+    t.integer "parent"
+    t.integer "order"
+    t.integer "user_id"
+    t.integer "resource"
+    t.integer "resource_type"
+    t.integer "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "resource_breakdown_structures", ["project_id"], name: "index_resource_breakdown_structures_on_project_id", using: :btree
-  add_index "resource_breakdown_structures", ["qualification_id"], name: "index_resource_breakdown_structures_on_qualification_id", using: :btree
+  add_index "resource_breakdown_structures", ["user_id"], name: "index_resource_breakdown_structures_on_user_id", using: :btree
+
+  create_table "resources", force: true do |t|
+    t.integer  "qualification_id"
+    t.integer  "resource_breakdown_structure_id"
+    t.integer  "count"
+    t.float    "amount"
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "resources", ["qualification_id"], name: "index_resources_on_qualification_id", using: :btree
+  add_index "resources", ["resource_breakdown_structure_id"], name: "index_resources_on_resource_breakdown_structure_id", using: :btree
+  add_index "resources", ["user_id"], name: "index_resources_on_user_id", using: :btree
+  add_index "resources", ["project_id"], name: "index_resources_on_project_id", using: :btree
 
   create_table "roles", force: true do |t|
     t.string   "name"
@@ -146,10 +169,10 @@ ActiveRecord::Schema.define(version: 20140107181855) do
     t.text     "description"
     t.text     "target"
     t.text     "resources"
-    t.text     "risks"
+    t.integer  "risk"
     t.integer  "work_breakdown_structure_id"
-    t.datetime "start"
-    t.datetime "end"
+    t.date     "start"
+    t.date     "end"
     t.integer  "cost"
     t.integer  "parent"
     t.integer  "project_id"

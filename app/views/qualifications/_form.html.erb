@@ -1,0 +1,34 @@
+<%#= form_for([@project, @work_breakdown_structure, @work_package], html: { class: 'form-horizontal wbs' }) do |f| %>
+<%= form_for([@project, @qualification], html: { class: 'form-horizontal r' }) do |f| %>
+  <% if @qualification.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@qualification.errors.count, "error") %> prohibited this qualification from being saved:</h2>
+
+      <ul>
+      <% @qualification.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name, class: 'col-md-3 control-label' %>
+    <div class="col-md-9">
+      <%= f.text_field :name, {class: 'form-control', placeholder: 'Bezeichnung'} %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :experience, class: 'col-md-3 control-label' %>
+    <div class="col-md-9">
+      <%= f.text_field :experience, {class: 'form-control', placeholder: 'Erfahrung'} %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-3 col-sm-9">
+      <%= f.submit class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>

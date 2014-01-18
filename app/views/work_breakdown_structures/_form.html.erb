@@ -1,0 +1,33 @@
+<%= form_for([@project, @work_breakdown_structure], html: { class: 'form-horizontal wbs' }) do |f| %>
+  <% if @work_breakdown_structure.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@work_breakdown_structure.errors.count, "error") %> prohibited this work_breakdown_structure from being saved:</h2>
+
+      <ul>
+      <% @work_breakdown_structure.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name, class: 'col-md-3 control-label' %>
+    <div class="col-md-9">
+      <%= f.text_field :name, {class: 'form-control', placeholder: 'Name'} %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :parent, class: 'col-md-3 control-label' %>
+    <div class="col-md-9">
+      <%= select_tag :parent, options_from_collection_for_select(WorkBreakdownStructure.order_for_selects(params[:project_id]), "id", :name_for_selects), { class: 'form-control' } %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-3 col-sm-9">
+      <%= f.submit class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>

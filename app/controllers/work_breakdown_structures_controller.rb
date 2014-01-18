@@ -1,5 +1,6 @@
 class WorkBreakdownStructuresController < ApplicationController
-  
+  before_action :set_work_breakdown_structure, only: [:show, :edit, :update, :destroy]
+
   def save_structure
     wbs = ActiveSupport::JSON.decode(params[:wbs])
 
@@ -14,40 +15,66 @@ class WorkBreakdownStructuresController < ApplicationController
       format.json { render :json => "OK" }
     end
   end
+  
+  def index
+    @project = Project.find(params[:project_id])
+    @work_breakdown_structure = WorkBreakdownStructure.new(project: @project)
+    @work_package = WorkPackage.new(project: @project)
+  end
 
-  def get_object
-    wbs = WorkBreakdownStructure.find(params[:id])
+  def show
+    respond_to do |format|
+      format.json { render json: @work_breakdown_structure.to_json(:include => :work_packages) }
+    end
+  end
+
+  def create 
+    @work_breakdown_structure = WorkBreakdownStructure.new(work_breakdown_structure_params)
+    @work_breakdown_structure.user = current_user
+    @work_breakdown_structure.project_id = params[:project_id]
+    @work_breakdown_structure.parent = params[:parent]
+    @work_breakdown_structure.level = WorkBreakdownStructure.find(@work_breakdown_structure.parent).level + 1
 
     respond_to do |format|
-      format.json { render json: wbs.to_json(:include => :work_packages) }
+      if @work_breakdown_structure.save
+        format.html { redirect_to project_work_breakdown_structures_path, notice: 'WBS was successfully created.' }
+        format.json { render action: 'show', status: :created, location: @work_breakdown_structure }
+      else
+        format.html { render action: 'new' }
+        format.json { render json: @work_breakdown_structure.project.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   def destroy
-    element = WorkBreakdownStructure.find(params["id"])
-    childs = find_childs(element.id)
+    childs = find_childs(@work_breakdown_structure.id)
     childs.each do |c|
+      c.work_packages.each do |wp|
+        wp.destroy
+      end
       c.destroy
     end
-    element.destroy
+    @work_breakdown_structure.work_packages.each do |wp|
+      wp.destroy
+    end
+    @work_breakdown_structure.destroy
     respond_to do |format|
-      format.html { redirect_to project_path(params["project_id"]) }
+      format.html { redirect_to project_work_breakdown_structures_path }
       format.json { head :no_content }
     end
   end
 
-  def add_element
-    parentElement = WorkBreakdownStructure.find(params["id"])
-
-    WorkBreakdownStructure.create(name: params[:name], level: parentElement.level + 1, parent: parentElement.id, order: 0, user: current_user, project: parentElement.project)
-
-    respond_to do |format|
-      msg = { :status => "ok", :message => "Success!" }
-      format.json  { render :json => msg }
-    end
-  end
-
   private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_work_breakdown_structure
+      @work_breakdown_structure = WorkBreakdownStructure.find(params[:id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def work_breakdown_structure_params
+      params.require(:work_breakdown_structure).permit(:name, :parent, :user_id, :order, :level, :project_id)
+    end
+
     # find all the childs to avoid dead entries
     def find_childs(parent)
       ret = []

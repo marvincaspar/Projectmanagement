@@ -1,0 +1,60 @@
+<script type="text/javascript">
+  var rbs_show_url = "<%= project_resource_breakdown_structure_path(project_id: params[:project_id], id: ':rbs_id') %>";
+  var r_show_url = "<%= project_resource_breakdown_structure_resource_path(project_id: params[:project_id], resource_breakdown_structure_id: ':rbs_id', id: ':id') %>";
+</script>
+<div class="dd">
+  <ul class="dd-list rbs">
+    <% prev_level = 0 %>
+    <% first_turn = true %>
+    <% ResourceBreakdownStructure.order_for_selects(params[:project_id]).each do |r| %>
+      <% if r.level > 0 %>
+        <% if prev_level < r.level %>
+          <ul class="dd-list">
+        <% end %>
+        
+        <% if prev_level > r.level %>
+          </li></ul>
+          <% diff = prev_level - r.level - 1 %>
+          <%= "#{'</li></ul>' * diff} </li>".html_safe %>
+        <% end %>
+
+        <% if prev_level == r.level && !first_turn %>
+          </li>
+        <% end %>
+
+        <li class="dd-item" data-id="<%= r.id %>">
+          <div class="dd-handle dd-handle"></div>
+          <div class="dd-content">
+            <span class="glyphicon glyphicon-folder-open"></span>
+            <%= r.name %>
+            <div class="pull-right">
+              <span class="glyphicon glyphicon-plus-sign"></span>
+              <span class="glyphicon glyphicon-eye-open show-rbs"></span>
+              <%= link_to '', project_resource_breakdown_structure_path(project_id: params[:project_id], id: r.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'glyphicon glyphicon-trash' %>
+            </div>
+          </div>
+
+          <% if r.resources.count > 0 %>
+            <ul class="dd-list r">
+              <% r.resources.each do |re| %>
+                <li class="dd-item" data-id="<%= re.id %>">
+                  <div class="dd-content">
+                    <span class="glyphicon glyphicon-user"></span>
+                    <%= re.qualification.name %>
+                    <div class="pull-right">
+                      <span class="glyphicon glyphicon-eye-open show-r"></span>
+                      <%= link_to '', project_resource_breakdown_structure_resource_path(project_id: params[:project_id], resource_breakdown_structure_id: r.id, id: re.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'glyphicon glyphicon-trash' %>
+                    </div>
+                  </div>
+                </li>
+              <% end %>
+            </ul>
+          <% end %>
+
+        <% prev_level = r.level %>
+        <% first_turn = false %>
+      <% end %>
+    <% end %>
+    <%= "#{'</li></ul>' * prev_level}".html_safe %>
+  </ul>            
+</div>

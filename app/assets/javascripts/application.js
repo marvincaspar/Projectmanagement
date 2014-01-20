@@ -40,6 +40,7 @@ function ready() {
   initPbs();
   initWbs();
   initRbs();
+  initRam();
 }
 
 jQuery(document).ready(ready)

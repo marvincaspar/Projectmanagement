@@ -26,6 +26,8 @@ Projectmanagement::Application.routes.draw do
       end
 
       resources :qualifications, only: [:create]
+
+      resources :resource_allocation_matrices
     end
 
     devise_for :users, 

@@ -4,10 +4,9 @@ class CreateResourceAllocationMatrices < ActiveRecord::Migration
       t.references :work_package
       t.references :resource_breakdown_structure
       t.references :product_breakdown_structure
-
+      t.references :project
+      
       t.timestamps
     end
-
-    add_index "resource_allocation_matrices", ["work_package_id", "resource_breakdown_structure_id", "product_breakdown_structure_id"], name: "index_resource_allocation_matrices", using: :btree
   end
 end

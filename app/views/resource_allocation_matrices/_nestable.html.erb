@@ -1,0 +1,58 @@
+<script type="text/javascript">
+  var wp_show_url = "<%= project_work_breakdown_structure_work_package_path(project_id: params[:project_id], work_breakdown_structure_id: ':wbs_id', id: ':id') %>";
+  var wp_edit_url = "<%= edit_project_resource_allocation_matrix_path(project_id: params[:project_id], id: ':id') %>";
+</script>
+<div class="dd">
+  <ul class="dd-list ram">
+    <% prev_level = 0 %>
+    <% first_turn = true %>
+    <% WorkBreakdownStructure.order_for_selects(params[:project_id]).each do |p| %>
+      <% if p.level > 0 %>
+        <% if prev_level < p.level %>
+          <ul class="dd-list">
+        <% end %>
+        
+        <% if prev_level > p.level %>
+          </li></ul>
+          <% diff = prev_level - p.level - 1 %>
+          <%= "#{'</li></ul>' * diff} </li>".html_safe %>
+        <% end %>
+
+        <% if prev_level == p.level && !first_turn %>
+          </li>
+        <% end %>
+
+        <li class="dd-item" data-id="<%= p.id %>">
+          <div class="dd-handle dd-handle"></div>
+          <div class="dd-content">
+            <span class="glyphicon glyphicon-folder-open"></span>
+            <%= p.name %>
+            <!-- <div class="pull-right">
+              <span class="glyphicon glyphicon-eye-open show-wbs"></span>
+            </div> -->
+          </div>
+
+          <% if p.work_packages.count > 0 %>
+            <ul class="dd-list wp">
+              <% p.work_packages.each do |wp| %>
+                <li class="dd-item" data-id="<%= wp.id %>">
+                  <div class="dd-content">
+                    <span class="glyphicon glyphicon-file"></span>
+                    <%= wp.name %>
+                    <div class="pull-right">
+                      <span class="glyphicon glyphicon-eye-open show-wp"></span>
+                      <span class="glyphicon glyphicon-pencil"></span>
+                    </div>
+                  </div>
+                </li>
+              <% end %>
+            </ul>
+          <% end %>
+
+        <% prev_level = p.level %>
+        <% first_turn = false %>
+      <% end %>
+    <% end %>
+    <%= "#{'</li></ul>' * prev_level}".html_safe %>
+  </ul>            
+</div>

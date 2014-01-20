@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 20140116172647) do
     t.integer  "work_package_id"
     t.integer  "resource_breakdown_structure_id"
     t.integer  "product_breakdown_structure_id"
+    t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

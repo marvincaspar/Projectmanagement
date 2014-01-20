@@ -12,9 +12,6 @@ class CreateResourceBreakdownStructures < ActiveRecord::Migration
 
       t.timestamps
     end
-
-    add_index "resource_breakdown_structures", ["project_id"], name: "index_resource_breakdown_structures_on_project_id", using: :btree
-    add_index "resource_breakdown_structures", ["user_id"], name: "index_resource_breakdown_structures_on_user_id", using: :btree
   end
 end
 

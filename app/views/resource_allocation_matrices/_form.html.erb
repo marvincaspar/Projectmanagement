@@ -1,0 +1,35 @@
+<%= form_for([@project, @resource_allocation_matrix], html: { class: 'form-horizontal' }) do |f| %>
+  <% if @resource_allocation_matrix.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@resource_allocation_matrix.errors.count, "error") %> prohibited this resource_allocation_matrix from being saved:</h2>
+
+      <ul>
+      <% @resource_allocation_matrix.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <input type="hidden" id="id" name="id" />
+  <input type="hidden" id="work_package_id" name="work_package_id" />
+
+  <div class="form-group">
+    <%= f.label :product_breakdown_structure, class: 'col-md-3 control-label' %>
+    <div class="col-md-9">
+      <%= select_tag :product_breakdown_structure_id, options_from_collection_for_select(ProductBreakdownStructure.order_for_selects(params[:project_id]), "id", :name_for_selects), { class: 'form-control' } %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :resource_breakdown_structure, class: 'col-md-3 control-label' %>
+    <div class="col-md-9">
+      <%= select_tag :resource_breakdown_structure_id, options_from_collection_for_select(ResourceBreakdownStructure.order_for_selects(params[:project_id]), "id", :name_for_selects), { class: 'form-control' } %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-3 col-sm-9">
+      <%= f.submit class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>

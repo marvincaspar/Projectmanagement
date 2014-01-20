@@ -63,9 +63,19 @@ function fillInfo(jsonObject, htmlObject) {
 
 function fillForm(jsonObject, htmlObject) {
   jQuery.each(jsonObject, function(key, value){
-    htmlObject.find('select#' + key).val(value);
-    htmlObject.find('input[id$="' + key + '"]').val(value);
-    htmlObject.find('textarea[id$="' + key + '"]').val(value);
+    setForm(htmlObject, key, value);
+
+    if(typeof value == 'object' && value != null) {
+      jQuery.each(value, function (k, v){
+        setForm(htmlObject, key, value);
+      });
+    }
   });
+}
+
+function setForm(htmlObject, key, value) {
+  htmlObject.find('select#' + key).val(value);
+  htmlObject.find('input[id$="' + key + '"]').val(value);
+  htmlObject.find('textarea[id$="' + key + '"]').val(value);
 }
 

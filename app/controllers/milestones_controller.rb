@@ -7,7 +7,7 @@ class MilestonesController < ApplicationController
   end
 
   def create 
-    set_mileston
+    set_milestone
 
     @milestone.update(milestone_params)
     @milestone.user = current_user
@@ -25,9 +25,15 @@ class MilestonesController < ApplicationController
     end
   end
 
+  def edit
+    respond_to do |format|
+      format.json { render json: @milestone.to_json(:include => :product_breakdown_structures) }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_mileston
+    def set_milestone
       @milestone = Milestone.where('id = ?', params[:id]).first
       if @milestone.nil?
         @milestone = Milestone.new(project: @project) 

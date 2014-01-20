@@ -1,3 +1,6 @@
+<script type="text/javascript">
+  var milestone_edit_url = "<%= edit_project_milestone_path(project_id: params[:project_id], id: ':id') %>";
+</script>
 <div class="row">
   <div class="col-md-6">
     <h2>Roadmap</h2>
@@ -11,7 +14,7 @@
       <% Milestone.order_for_selects(params[:project_id]).each do |m| %>
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h4 class="panel-title">
+            <h4 class="panel-title" data-id="<%= m.id %>">
               <a data-toggle="collapse" data-parent="#milestone" href="#milestone_<%= m.id %>">
                 <%= m.name %> <small><%= m.end_date %></small>
               </a>

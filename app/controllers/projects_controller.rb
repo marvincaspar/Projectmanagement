@@ -20,6 +20,8 @@ class ProjectsController < ApplicationController
       if @project.save
         current_user.add_role :project_admin, @project
         ProductBreakdownStructure.create name: @project.name, level: 0, parent: 0, order: 0, user: current_user, project: @project
+        WorkBreakdownStructure.create name: @project.name, level: 0, parent: 0, order: 0, user: current_user, project: @project
+        ResourceBreakdownStructure.create name: @project.name, level: 0, parent: 0, order: 0, user: current_user, resource: :personal, resource_type: :intern, project: @project  
 
         format.html { redirect_to project_path(@project), notice: 'Project was successfully created.' }
         format.json { render action: 'show', status: :created, location: @project }

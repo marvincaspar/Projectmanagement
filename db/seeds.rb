@@ -13,14 +13,16 @@ puts " done"
 
 print "Create Project"
 # ============ Project ============
-project1 = Project.create name: 'Project #1', user: admin
-project2 = Project.create name: 'Project #2', user: user1
 auto = Project.create name: 'PKW', description: 'Wir bauen ein Auto', user: user1
+project1 = Project.create name: 'Project #1', description: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et...', user: admin
+project2 = Project.create name: 'Project #2', description: 'Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit...', user: user1
 puts " done"
 
 
 print "Create Product Breakdown Structure"
 # ============ Product Breakdown Strucutre ============
+ProductBreakdownStructure.create name: project1.name, level: 0, parent: 0, order: 0, user: user1, project: project1
+ProductBreakdownStructure.create name: project2.name, level: 0, parent: 0, order: 0, user: user1, project: project2
 pbs_pkw = ProductBreakdownStructure.create name: auto.name, level: 0, parent: 0, order: 0, user: user1, project: auto
 
 pbs_karosserie = ProductBreakdownStructure.create name: 'Karosserie', level: pbs_pkw.level + 1, parent: pbs_pkw.id, order: 0, user: user1, project: auto
@@ -55,6 +57,8 @@ puts " done"
 
 print "Create Work Breakdown Structure"
 # ============ Work Breakdown Structure ============
+WorkBreakdownStructure.create name: project1.name, level: 0, parent: 0, order: 0, user: user1, project: project1
+WorkBreakdownStructure.create name: project2.name, level: 0, parent: 0, order: 0, user: user1, project: project2
 wbs_pkw = WorkBreakdownStructure.create name: auto.name, level: 0, parent: 0, order: 0, user: user1, project: auto
 
 wbs_karosserie = WorkBreakdownStructure.create name: 'Karosserie', level: wbs_pkw.level + 1, parent: wbs_pkw.id, order: 0, user: user1, project: auto
@@ -222,6 +226,8 @@ puts " done"
 
 print "Create Resource Breakdown Structure"
 # ============ Resource Breakdown Structure ============
+ResourceBreakdownStructure.create name: project1.name, level: 0, parent: 0, order: 0, user: user1, resource: :personal, resource_type: :intern, project: project1
+ResourceBreakdownStructure.create name: project2.name, level: 0, parent: 0, order: 0, user: user1, resource: :personal, resource_type: :intern, project: project2
 rbs_pkw = ResourceBreakdownStructure.create name: auto.name, level: 0, parent: 0, order: 0, user: user1, resource: :personal, resource_type: :intern, project: auto
 
 rbs1 = ResourceBreakdownStructure.create name: "Projektleiter", level: rbs_pkw.level + 1, parent: rbs_pkw.id, order: 0, user: user1, resource: :personal, resource_type: :intern, project: auto

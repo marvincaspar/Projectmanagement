@@ -1,13 +1,32 @@
-<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, :autofocus => true %></div>
+<%= form_for(resource, :as => resource_name, :url => session_path(resource_name), html: { class: 'form-horizontal r' }) do |f| %>
+  
+  <div class="form-group">
+    <%= f.label :email, class: 'col-md-3 control-label' %>
+    <div class="col-md-9">
+      <%= f.email_field :email, {class: 'form-control', placeholder: 'E-Mail'} %>
+    </div>
+  </div>
 
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
+  <div class="form-group">
+    <%= f.label :password, class: 'col-md-3 control-label' %>
+    <div class="col-md-9">
+      <%= f.password_field :password, {class: 'form-control', placeholder: 'Passwort'} %>
+    </div>
+  </div>
 
   <% if devise_mapping.rememberable? -%>
-    <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
-  <% end -%>
+    <div class="form-group">
+      <div class="col-sm-offset-3 col-sm-9">
+        <div class="checkbox">
+          <%= f.check_box :remember_me %> <%= f.label :remember_me %>
+        </div>
+      </div>
+    </div>
+  <% end %>
 
-  <div><%= f.submit "Sign in" %></div>
+  <div class="form-group">
+    <div class="col-sm-offset-3 col-sm-9">
+      <%= f.submit "Sign in", class: "btn btn-primary" %>
+    </div>
+  </div>
 <% end %>

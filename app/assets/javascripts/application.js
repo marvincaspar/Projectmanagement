@@ -36,6 +36,7 @@ function ready() {
     element.addClass('active');
   });
 
+  initProject();
   initPbs();
   initWbs();
   initRbs();

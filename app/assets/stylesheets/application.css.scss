@@ -19,6 +19,8 @@
 
 
 body { 
+  background-image: image-url("bg.png");
+  background-repeat: repeat;
   padding-top: 70px; 
 }
 
@@ -28,4 +30,8 @@ label.thin {
 
 .tab-content {
   margin-top: 10px;
+}
+
+.btn {
+  margin-bottom: 10px
 }

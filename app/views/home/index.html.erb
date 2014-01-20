@@ -1,41 +1,71 @@
-<div class="row">
-  <div class="col-md-6">
-    <h2>Meine Projekte <small>ein kleiner Text</small></h2>
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>
-            #
-          </th>
-          <th>
-            Name
-          </th>
-          <th>
-          </th>
-        </tr>
-      </thead>
-      <% current_user.projects.each do |project| %>
-        <tr>
-          <td>
-            <%= project.id %>
-          </td>
-          <td>
-            <%= project.name %>
-          </td>
-          <td>
-            <%= link_to '', project, { class: 'glyphicon glyphicon-eye-open' } %>
-            <%= link_to '', edit_project_path(project), { class: 'glyphicon glyphicon-pencil' } %>
-            <%= link_to '', project, method: :delete, data: { confirm: 'Are you sure?' }, class: 'glyphicon glyphicon-remove' %>
-          </td>
-        </tr>
-      <% end %>
-    </table>
+<% if user_signed_in? %>
 
-    <%= link_to 'Neues Projekt anlegen', new_project_path, class: 'btn btn-primary' %>
+  <div class="row">
+    <div class="col-sm-6 col-md-4">
+      <%= link_to 'Neues Projekt anlegen', new_project_path, class: 'btn btn-primary' %>
+    </div>
+  </div>
+  <div class="row">
+    <% Project.all.each do |project| %>
+      <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+          <div class="caption">
+            <h3>
+              <%= project.name %>
+            </h3>
+            <p>
+              <%= project.description %>
+            </p>
+            <p>
+              <%= link_to '<span class="glyphicon glyphicon-eye-open"></span>'.html_safe, project, { class: 'btn btn-primary' } %>
+              <%#= link_to '<span class="glyphicon glyphicon-pencil"></span>'.html_safe, edit_project_path(project), { class: 'btn btn-primary' } %>
+              <%= link_to '<span class="glyphicon glyphicon-trash"></span>'.html_safe, project, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+            </p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 
-    <%= link_to 'Projekt-Setup', new_project_path, class: 'btn btn-success' %>
-  </div>
-  <div class="col-md-6">
-    <h2>Meine Aufgaben <small>ein kleiner Text</small></h2>
-  </div>
-</div>
+  <!-- <div class="row">
+    <div class="col-md-6">
+      <h2>Meine Projekte <small>ein kleiner Text</small></h2>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>
+              #
+            </th>
+            <th>
+              Name
+            </th>
+            <th>
+            </th>
+          </tr>
+        </thead>
+        <% current_user.projects.each do |project| %>
+          <tr>
+            <td>
+              <%= project.id %>
+            </td>
+            <td>
+              <%= project.name %>
+            </td>
+            <td>
+              <%= link_to '', project, { class: 'glyphicon glyphicon-eye-open' } %>
+              <%= link_to '', edit_project_path(project), { class: 'glyphicon glyphicon-pencil' } %>
+              <%= link_to '', project, method: :delete, data: { confirm: 'Are you sure?' }, class: 'glyphicon glyphicon-remove' %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+
+      <%= link_to 'Neues Projekt anlegen', new_project_path, class: 'btn btn-primary' %>
+
+      <%= link_to 'Projekt-Setup', new_project_path, class: 'btn btn-success' %>
+    </div>
+    <div class="col-md-6">
+      <h2>Meine Aufgaben <small>ein kleiner Text</small></h2>
+    </div>
+  </div> -->
+<% end %>

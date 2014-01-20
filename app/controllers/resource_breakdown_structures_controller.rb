@@ -14,8 +14,16 @@ class ResourceBreakdownStructuresController < ApplicationController
     end
   end
 
+  def edit
+    respond_to do |format|
+      format.json { render json: @resource_breakdown_structure.to_json }
+    end
+  end
+
   def create 
-    @resource_breakdown_structure = ResourceBreakdownStructure.new(resource_breakdown_structure_params)
+    set_resource_breakdown_structure
+
+    @resource_breakdown_structure.update(resource_breakdown_structure_params)
     @resource_breakdown_structure.user = current_user
     @resource_breakdown_structure.project_id = params[:project_id]
     @resource_breakdown_structure.parent = params[:parent]
@@ -47,6 +55,9 @@ class ResourceBreakdownStructuresController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_resource_breakdown_structure
       @resource_breakdown_structure = ResourceBreakdownStructure.find(params[:id])
+      if @resource_breakdown_structure.nil?
+        @resource_breakdown_structure = ResourceBreakdownStructure.new(project: @project) 
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

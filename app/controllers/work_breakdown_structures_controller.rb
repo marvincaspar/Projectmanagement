@@ -28,8 +28,16 @@ class WorkBreakdownStructuresController < ApplicationController
     end
   end
 
+  def edit
+    respond_to do |format|
+      format.json { render json: @work_breakdown_structure.to_json }
+    end
+  end
+
   def create 
-    @work_breakdown_structure = WorkBreakdownStructure.new(work_breakdown_structure_params)
+    set_work_breakdown_structure
+
+    @work_breakdown_structure.update(work_breakdown_structure_params)
     @work_breakdown_structure.user = current_user
     @work_breakdown_structure.project_id = params[:project_id]
     @work_breakdown_structure.parent = params[:parent]
@@ -68,6 +76,9 @@ class WorkBreakdownStructuresController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_work_breakdown_structure
       @work_breakdown_structure = WorkBreakdownStructure.find(params[:id])
+      if @work_breakdown_structure.nil?
+        @work_breakdown_structure = WorkBreakdownStructure.new(project: @project) 
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

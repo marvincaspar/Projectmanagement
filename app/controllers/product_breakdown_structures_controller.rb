@@ -12,8 +12,16 @@ class ProductBreakdownStructuresController < ApplicationController
     end
   end
 
+  def edit
+    respond_to do |format|
+      format.json { render json: @product_breakdown_structure.to_json }
+    end
+  end
+
   def create 
-    @product_breakdown_structure = ProductBreakdownStructure.new(product_breakdown_structure_params)
+    set_product_breakdown_structure
+
+    @product_breakdown_structure.update(product_breakdown_structure_params)
     @product_breakdown_structure.user = current_user
     @product_breakdown_structure.project_id = params[:project_id]
     @product_breakdown_structure.parent = params[:parent]
@@ -47,6 +55,9 @@ class ProductBreakdownStructuresController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_product_breakdown_structure
       @product_breakdown_structure = ProductBreakdownStructure.find(params[:id])
+      if @product_breakdown_structure.nil?
+        @product_breakdown_structure = ProductBreakdownStructure.new(project: @project) 
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

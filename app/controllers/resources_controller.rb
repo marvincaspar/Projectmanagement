@@ -2,7 +2,9 @@ class ResourcesController < ApplicationController
   before_action :set_resource, only: [:show, :edit, :update, :destroy]
 
   def create
-    @resource = Resource.new(resource_params)
+    set_resource
+
+    @resource.update(resource_params)
     @resource.user = current_user
     @resource.project_id = params[:project_id]
     @resource.qualification_id = params[:qualification_id]
@@ -25,6 +27,12 @@ class ResourcesController < ApplicationController
     end
   end
 
+  def edit
+    respond_to do |format|
+      format.json { render json: @resource.to_json }
+    end
+  end
+
   def destroy
     @resource.destroy
     respond_to do |format|
@@ -37,6 +45,9 @@ class ResourcesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_resource
       @resource = Resource.find(params[:id])
+      if @resource.nil?
+        @resource = Resource.new(project: @project) 
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

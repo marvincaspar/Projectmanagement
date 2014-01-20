@@ -1,5 +1,6 @@
 <script type="text/javascript">
-  var pbs_show_url = "<%= project_product_breakdown_structure_path(project_id: params[:project_id], id: ':psb_id') %>";
+  var pbs_show_url = "<%= project_product_breakdown_structure_path(project_id: params[:project_id], id: ':id') %>";
+  var pbs_edit_url = "<%= edit_project_product_breakdown_structure_path(project_id: params[:project_id], id: ':id') %>";
 </script>
 <div class="dd pbs">
   <ul class="dd-list">
@@ -28,6 +29,7 @@
             <div class="pull-right">
               <span class="glyphicon glyphicon-plus-sign"></span>
               <span class="glyphicon glyphicon-eye-open"></span>
+              <span class="glyphicon glyphicon-pencil"></span>
               <%= link_to '', project_product_breakdown_structure_path(project_id: params[:project_id], id: p.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'glyphicon glyphicon-trash' %>
             </div>
           </div>

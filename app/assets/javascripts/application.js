@@ -46,8 +46,9 @@ function ready() {
 jQuery(document).ready(ready)
 jQuery(document).on('page:load', ready)
 
-function fillForm(jsonObject, htmlObject) {
+function fillInfo(jsonObject, htmlObject) {
   jQuery.each(jsonObject, function(key, value){
+    console.log(key);
     htmlObject.find('.' + key).text(value);
 
     if(typeof value == 'object' && value != null) {
@@ -57,3 +58,12 @@ function fillForm(jsonObject, htmlObject) {
     }
   });
 }
+
+function fillForm(jsonObject, htmlObject) {
+  jQuery.each(jsonObject, function(key, value){
+    htmlObject.find('select#' + key).val(value);
+    htmlObject.find('input[id$="' + key + '"]').val(value);
+    htmlObject.find('textarea[id$="' + key + '"]').val(value);
+  });
+}
+

@@ -14,7 +14,7 @@ Projectmanagement::Application.routes.draw do
           resources :work_packages, only: [:create]
         end
 
-        resources :work_packages, only: [:show, :update, :destroy]
+        resources :work_packages, only: [:show, :edit, :update, :destroy]
       end
 
       resources :resource_breakdown_structures do
@@ -22,7 +22,7 @@ Projectmanagement::Application.routes.draw do
           resources :resources, only: [:create]
         end
 
-        resources :resources, only: [:show, :update, :destroy]
+        resources :resources, only: [:show, :edit, :update, :destroy]
       end
 
       resources :qualifications, only: [:create]

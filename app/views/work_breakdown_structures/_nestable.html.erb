@@ -1,6 +1,9 @@
 <script type="text/javascript">
   var wbs_show_url = "<%= project_work_breakdown_structure_path(project_id: params[:project_id], id: ':wbs_id') %>";
   var wp_show_url = "<%= project_work_breakdown_structure_work_package_path(project_id: params[:project_id], work_breakdown_structure_id: ':wbs_id', id: ':id') %>";
+
+  var wbs_edit_url = "<%= edit_project_work_breakdown_structure_path(project_id: params[:project_id], id: ':id') %>";
+  var wp_edit_url = "<%= edit_project_work_breakdown_structure_work_package_path(project_id: params[:project_id], work_breakdown_structure_id: ':wbs_id', id: ':id') %>";
 </script>
 <div class="dd">
   <ul class="dd-list wbs">
@@ -30,6 +33,7 @@
             <div class="pull-right">
               <span class="glyphicon glyphicon-plus-sign"></span>
               <span class="glyphicon glyphicon-eye-open show-wbs"></span>
+              <span class="glyphicon glyphicon-pencil edit-wbs"></span>
               <%= link_to '', project_work_breakdown_structure_path(project_id: params[:project_id], id: p.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'glyphicon glyphicon-trash' %>
             </div>
           </div>
@@ -43,6 +47,7 @@
                     <%= wp.name %>
                     <div class="pull-right">
                       <span class="glyphicon glyphicon-eye-open show-wp"></span>
+                      <span class="glyphicon glyphicon-pencil edit-wp"></span>
                       <%= link_to '', project_work_breakdown_structure_work_package_path(project_id: params[:project_id], work_breakdown_structure_id: p.id, id: wp.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'glyphicon glyphicon-trash' %>
                     </div>
                   </div>

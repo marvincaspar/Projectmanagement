@@ -1,6 +1,9 @@
 <script type="text/javascript">
-  var rbs_show_url = "<%= project_resource_breakdown_structure_path(project_id: params[:project_id], id: ':rbs_id') %>";
+  var rbs_show_url = "<%= project_resource_breakdown_structure_path(project_id: params[:project_id], id: ':id') %>";
   var r_show_url = "<%= project_resource_breakdown_structure_resource_path(project_id: params[:project_id], resource_breakdown_structure_id: ':rbs_id', id: ':id') %>";
+
+  var rbs_edit_url = "<%= edit_project_resource_breakdown_structure_path(project_id: params[:project_id], id: ':id') %>";
+  var r_edit_url = "<%= edit_project_resource_breakdown_structure_resource_path(project_id: params[:project_id], resource_breakdown_structure_id: ':rbs_id', id: ':id') %>";
 </script>
 <div class="dd">
   <ul class="dd-list rbs">
@@ -30,6 +33,7 @@
             <div class="pull-right">
               <span class="glyphicon glyphicon-plus-sign"></span>
               <span class="glyphicon glyphicon-eye-open show-rbs"></span>
+              <span class="glyphicon glyphicon-pencil edit-rbs"></span>
               <%= link_to '', project_resource_breakdown_structure_path(project_id: params[:project_id], id: r.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'glyphicon glyphicon-trash' %>
             </div>
           </div>
@@ -43,6 +47,7 @@
                     <%= re.qualification.name %>
                     <div class="pull-right">
                       <span class="glyphicon glyphicon-eye-open show-r"></span>
+                      <span class="glyphicon glyphicon-pencil edit-r"></span>
                       <%= link_to '', project_resource_breakdown_structure_resource_path(project_id: params[:project_id], resource_breakdown_structure_id: r.id, id: re.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'glyphicon glyphicon-trash' %>
                     </div>
                   </div>

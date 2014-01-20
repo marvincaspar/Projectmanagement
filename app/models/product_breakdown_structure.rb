@@ -2,6 +2,9 @@ class ProductBreakdownStructure < ActiveRecord::Base
   belongs_to :user
   belongs_to :project
 
+  has_and_belongs_to_many :milestones
+
+
   def name_for_selects
     "#{'&nbsp;&nbsp;&nbsp;&nbsp;' * level} #{name}".html_safe
   end

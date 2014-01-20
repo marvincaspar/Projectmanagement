@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-md-6">
+    <h2>Roadmap</h2>
+    <span class="btn btn-primary btn-sm show_form">Neue Meilenstein</span>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+
+    <div class="panel-group" id="accordion">
+      <% Milestone.order_for_selects(params[:project_id]).each do |m| %>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent="#accordion" href="#milestone_<%= m.id %>">
+                <%= m.name %> <small><%= m.end_date %></small>
+              </a>
+            </h4>
+          </div>
+          <div id="milestone_<%= m.id %>" class="panel-collapse collapse">
+            <div class="panel-body">
+              <p>
+                <%= m.description %>
+              </p>
+              <p>
+                <ul>
+                  <% m.product_breakdown_structures.each do |p| %>
+                    <li>
+                      <%= p.name %>
+                    </li>
+                  <% end %>
+                </ul>
+              </p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+
+    
+  </div>
+  <div class="col-md-6">
+    <div id="milestone_form">
+      <%= render "form" %>
+    </div>
+  </div>
+</div>

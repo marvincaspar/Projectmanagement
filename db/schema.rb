@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140116172647) do
+ActiveRecord::Schema.define(version: 20140120142538) do
 
   create_table "attachments", force: true do |t|
     t.datetime "created_at"
@@ -25,6 +25,25 @@ ActiveRecord::Schema.define(version: 20140116172647) do
   create_table "attachments_work_packages", id: false, force: true do |t|
     t.integer "attachment_id",   null: false
     t.integer "work_package_id", null: false
+  end
+
+  create_table "milestones", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.integer  "project_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "milestones", ["project_id"], name: "index_milestones_on_project_id", using: :btree
+  add_index "milestones", ["user_id"], name: "index_milestones_on_user_id", using: :btree
+
+  create_table "milestones_product_breakdown_structures", id: false, force: true do |t|
+    t.integer "milestone_id",                   null: false
+    t.integer "product_breakdown_structure_id", null: false
   end
 
   create_table "product_breakdown_structures", force: true do |t|
@@ -73,14 +92,14 @@ ActiveRecord::Schema.define(version: 20140116172647) do
   add_index "resource_allocation_matrices", ["work_package_id", "resource_breakdown_structure_id", "product_breakdown_structure_id"], name: "index_resource_allocation_matrices", using: :btree
 
   create_table "resource_breakdown_structures", force: true do |t|
-    t.string "name"
-    t.integer "level"
-    t.integer "parent"
-    t.integer "order"
-    t.integer "user_id"
-    t.integer "resource"
-    t.integer "resource_type"
-    t.integer "project_id"
+    t.string   "name"
+    t.integer  "level"
+    t.integer  "parent"
+    t.integer  "order"
+    t.integer  "user_id"
+    t.integer  "resource"
+    t.integer  "resource_type"
+    t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -99,10 +118,10 @@ ActiveRecord::Schema.define(version: 20140116172647) do
     t.datetime "updated_at"
   end
 
+  add_index "resources", ["project_id"], name: "index_resources_on_project_id", using: :btree
   add_index "resources", ["qualification_id"], name: "index_resources_on_qualification_id", using: :btree
   add_index "resources", ["resource_breakdown_structure_id"], name: "index_resources_on_resource_breakdown_structure_id", using: :btree
   add_index "resources", ["user_id"], name: "index_resources_on_user_id", using: :btree
-  add_index "resources", ["project_id"], name: "index_resources_on_project_id", using: :btree
 
   create_table "roles", force: true do |t|
     t.string   "name"

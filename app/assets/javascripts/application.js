@@ -18,11 +18,12 @@
 //= require jquery-sortable
 //= require jquery.jOrgChart
 //= require jquery.nestable
+//= require select2
 //= require_tree .
 
 
 function ready() {
-  jQuery( ".datepicker" ).datepicker();
+  jQuery( ".datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
 
   jQuery('.dd').nestable({ 
     listNodeName: 'ul',
@@ -41,6 +42,7 @@ function ready() {
   initWbs();
   initRbs();
   initRam();
+  initMilestone();
 }
 
 jQuery(document).ready(ready)

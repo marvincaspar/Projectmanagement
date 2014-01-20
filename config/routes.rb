@@ -1,19 +1,17 @@
 Projectmanagement::Application.routes.draw do
+  get "milestones/index"
   #scope '(:locale)', :locale => /en|de/ do
     root :to => "home#index"
     get "home/index"
 
-    # PROJECTS
     resources :projects do
       resources :product_breakdown_structures
 
       resources :work_breakdown_structures do
         collection do
           post :save_structure
-
           resources :work_packages, only: [:create]
         end
-
         resources :work_packages, only: [:show, :edit, :update, :destroy]
       end
 
@@ -21,13 +19,14 @@ Projectmanagement::Application.routes.draw do
         collection do
           resources :resources, only: [:create]
         end
-
         resources :resources, only: [:show, :edit, :update, :destroy]
       end
 
       resources :qualifications, only: [:create]
 
       resources :resource_allocation_matrices
+      
+      resources :milestones
     end
 
     devise_for :users, 

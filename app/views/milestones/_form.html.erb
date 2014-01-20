@@ -1,0 +1,49 @@
+<%= form_for([@project, @milestone], html: { class: 'form-horizontal milestone' }) do |f| %>
+  <% if @milestone.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@milestone.errors.count, "error") %> prohibited this milestone from being saved:</h2>
+
+      <ul>
+      <% @milestone.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <input type="hidden" id="id" name="id" />
+  
+  <div class="form-group">
+    <%= f.label :name, class: 'col-md-3 control-label' %>
+    <div class="col-md-9">
+      <%= f.text_field :name, {class: 'form-control', placeholder: 'Name'} %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :end_date, class: 'col-md-3 control-label' %>
+    <div class="col-md-9">
+      <%= f.text_field :end_date, {class: 'form-control datepicker', placeholder: 'End-Datum'} %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :product_breakdown_structures, class: 'col-md-3 control-label' %>
+    <div class="col-md-9">
+      <%= select_tag :product_breakdown_structure_ids, options_from_collection_for_select(ProductBreakdownStructure.order_for_selects(params[:project_id]), "id", :name_for_selects), { multiple: true }  %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :description, class: 'col-md-3 control-label' %>
+    <div class="col-md-9">
+      <%= f.text_area :description, {class: 'form-control', placeholder: 'Beschreibung'} %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-3 col-sm-9">
+      <%= f.submit class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>

@@ -261,3 +261,13 @@ Resource.create qualification: nac300, resource_breakdown_structure: rbs9, count
 Resource.create qualification: dcoc300, resource_breakdown_structure: rbs10, count: 1, amount: 100, user: user1, project: auto
 Resource.create qualification: dcoc400, resource_breakdown_structure: rbs10, count: 1, amount: 100, user: user1, project: auto
 puts " done"
+
+print "Create Milestone"
+# ============ Milestone ============
+m = Milestone.create name: 'Fahrgestell', user: user1, project: auto, end_date: Date.today + 3.days, description: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et...'
+m.product_breakdown_structures << [ pbs_reifen1, pbs_reifen2, pbs_reifen3, pbs_reifen4, pbs_felge1, pbs_felge2, pbs_felge3, pbs_felge4 ]
+m = Milestone.create name: 'Antriebskomplex', user: user1, project: auto, end_date: Date.today, description: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et...'
+m.product_breakdown_structures << [ pbs_motorblock, pbs_getriebe ]
+m = Milestone.create name: 'Karosserie', user: user1, project: auto, end_date: Date.today + 5.days, description: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et...'
+m.product_breakdown_structures << [ pbs_kotfluegel, pbs_motorhaube, pbs_tuer ]
+puts " done"

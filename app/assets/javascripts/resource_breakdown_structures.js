@@ -39,6 +39,7 @@ function initRbs() {
   jQuery('.rbs .glyphicon-plus-sign, .show_form').click(function() {
     jQuery('#rbs_show').hide();
     jQuery('#r_show').hide();
+    clearForm(jQuery('#form'));
     var id = jQuery(this).parents('.dd-item').data('id');
     jQuery('.rbs #parent').val(id);
     jQuery('.r #resource_breakdown_structure_id').val(id);

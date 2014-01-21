@@ -6,6 +6,8 @@ function initMilestone() {
 
   jQuery('.show_form').click(function() {
     var id = jQuery(this).parents('.dd-item').data('id');
+    clearForm(jQuery('#milestone_form'));
+    jQuery('#product_breakdown_structure_ids').trigger("change");
     jQuery('#milestone_form').show();
   });
 

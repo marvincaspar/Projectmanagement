@@ -39,6 +39,7 @@ function initWbs() {
   jQuery('.wbs .glyphicon-plus-sign, .show_form').click(function() {
     jQuery('#wbs_show').hide();
     jQuery('#wp_show').hide();
+    clearForm(jQuery('#form'));
     var id = jQuery(this).parents('.dd-item').data('id');
     jQuery('.wbs #parent').val(id);
     jQuery('.wp #work_breakdown_structure_id').val(id);

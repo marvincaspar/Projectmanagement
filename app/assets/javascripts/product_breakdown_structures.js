@@ -18,6 +18,7 @@ function initPbs() {
 
   jQuery('.pbs .glyphicon-plus-sign, .show_form').click(function() {
     jQuery('#pbs_show').hide();
+    clearForm(jQuery('#pbs_form'));
     var id = jQuery(this).parents('.dd-item').data('id');
     jQuery('.pbs #parent').val(id);
     jQuery('#pbs_form').show();

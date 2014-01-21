@@ -42,6 +42,7 @@ group :development do
   gem 'binding_of_caller'
 
   gem 'hirb'
+  gem 'railroady'
 end
 
 # Use ActiveModel has_secure_password

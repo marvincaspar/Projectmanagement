@@ -79,3 +79,9 @@ function setForm(htmlObject, key, value) {
   htmlObject.find('textarea[id$="' + key + '"]').val(value);
 }
 
+function clearForm(htmlObject) {
+  htmlObject.find('select').val('');
+  htmlObject.find('input[type!="submit"]').val('');
+  htmlObject.find('textarea').val('');
+}
+

@@ -12,6 +12,7 @@ class ProductBreakdownStructure < ActiveRecord::Base
   def self.order_for_selects(project_id)
     output = []
     arr = ProductBreakdownStructure.where('project_id = ?', project_id)
+                                   .order('product_breakdown_structures.level ASC, product_breakdown_structures.parent ASC, product_breakdown_structures.order ASC')
 
     root = arr.where('level = 0').first
 

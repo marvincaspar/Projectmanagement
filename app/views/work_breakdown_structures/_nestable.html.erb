@@ -4,6 +4,8 @@
 
   var wbs_edit_url = "<%= edit_project_work_breakdown_structure_path(project_id: params[:project_id], id: ':id') %>";
   var wp_edit_url = "<%= edit_project_work_breakdown_structure_work_package_path(project_id: params[:project_id], work_breakdown_structure_id: ':wbs_id', id: ':id') %>";
+
+  var save_structure = '<%= save_structure_project_work_breakdown_structures_path(project_id: params[:project_id]) %>';
 </script>
 <div class="dd">
   <ul class="dd-list wbs">
@@ -11,7 +13,7 @@
     <% first_turn = true %>
     <% WorkBreakdownStructure.order_for_selects(params[:project_id]).each do |p| %>
       <% if p.level > 0 %>
-        <% if prev_level < p.level %>
+        <% if prev_level < p.level && !first_turn %>
           <ul class="dd-list">
         <% end %>
         
@@ -25,10 +27,10 @@
           </li>
         <% end %>
 
-        <li class="dd-item" data-id="<%= p.id %>">
-          <div class="dd-handle dd-handle"></div>
+        <li class="dd-item" data-id="<%= p.id %>" data-type="structure">
+          <div class="dd-handle"></div>
           <div class="dd-content">
-            <span class="glyphicon glyphicon-folder-open"></span>
+            <span class="glyphicon glyphicon-folder-open"></span>&nbsp;
             <%= p.name %>
             <div class="pull-right">
               <span class="glyphicon glyphicon-plus-sign"></span>
@@ -41,9 +43,9 @@
           <% if p.work_packages.count > 0 %>
             <ul class="dd-list wp">
               <% p.work_packages.each do |wp| %>
-                <li class="dd-item" data-id="<%= wp.id %>">
+                <li class="dd-item" data-id="<%= wp.id %>" data-type="package">
                   <div class="dd-content">
-                    <span class="glyphicon glyphicon-file"></span>
+                    <span class="glyphicon glyphicon-file"></span>&nbsp;
                     <%= wp.name %>
                     <div class="pull-right">
                       <span class="glyphicon glyphicon-eye-open show-wp"></span>

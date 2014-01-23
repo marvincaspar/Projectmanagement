@@ -4,6 +4,8 @@
 
   var rbs_edit_url = "<%= edit_project_resource_breakdown_structure_path(project_id: params[:project_id], id: ':id') %>";
   var r_edit_url = "<%= edit_project_resource_breakdown_structure_resource_path(project_id: params[:project_id], resource_breakdown_structure_id: ':rbs_id', id: ':id') %>";
+
+  var save_structure = '<%= save_structure_project_resource_breakdown_structures_path(project_id: params[:project_id]) %>';
 </script>
 <div class="dd">
   <ul class="dd-list rbs">
@@ -11,7 +13,7 @@
     <% first_turn = true %>
     <% ResourceBreakdownStructure.order_for_selects(params[:project_id]).each do |r| %>
       <% if r.level > 0 %>
-        <% if prev_level < r.level %>
+        <% if prev_level < r.level && !first_turn %>
           <ul class="dd-list">
         <% end %>
         
@@ -25,10 +27,10 @@
           </li>
         <% end %>
 
-        <li class="dd-item" data-id="<%= r.id %>">
-          <div class="dd-handle dd-handle"></div>
+        <li class="dd-item" data-id="<%= r.id %>" data-type="structure">
+          <div class="dd-handle"></div>
           <div class="dd-content">
-            <span class="glyphicon glyphicon-folder-open"></span>
+            <span class="glyphicon glyphicon-folder-open"></span>&nbsp;
             <%= r.name %>
             <div class="pull-right">
               <span class="glyphicon glyphicon-plus-sign"></span>
@@ -41,9 +43,9 @@
           <% if r.resources.count > 0 %>
             <ul class="dd-list r">
               <% r.resources.each do |re| %>
-                <li class="dd-item" data-id="<%= re.id %>">
+                <li class="dd-item" data-id="<%= re.id %>" data-type="resource">
                   <div class="dd-content">
-                    <span class="glyphicon glyphicon-user"></span>
+                    <span class="glyphicon glyphicon-user"></span>&nbsp;
                     <%= re.qualification.name %>
                     <div class="pull-right">
                       <span class="glyphicon glyphicon-eye-open show-r"></span>

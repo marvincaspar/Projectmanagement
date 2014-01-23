@@ -1,6 +1,8 @@
 <script type="text/javascript">
   var pbs_show_url = "<%= project_product_breakdown_structure_path(project_id: params[:project_id], id: ':id') %>";
   var pbs_edit_url = "<%= edit_project_product_breakdown_structure_path(project_id: params[:project_id], id: ':id') %>";
+
+  var save_structure = '<%= save_structure_project_product_breakdown_structures_path(project_id: params[:project_id]) %>';
 </script>
 <div class="dd pbs">
   <ul class="dd-list">
@@ -8,7 +10,7 @@
     <% first_turn = true %>
     <% ProductBreakdownStructure.order_for_selects(params[:project_id]).each do |p| %>
       <% if p.level > 0 %>
-        <% if prev_level < p.level %>
+        <% if prev_level < p.level && !first_turn %>
           <ul class="dd-list">
         <% end %>
         
@@ -22,8 +24,8 @@
           </li>
         <% end %>
 
-        <li class="dd-item" data-id="<%= p.id %>">
-          <div class="dd-handle dd-handle"></div>
+        <li class="dd-item" data-id="<%= p.id %>" data-type="structure">
+          <div class="dd-handle"></div>
           <div class="dd-content">
             <%= p.name %>
             <div class="pull-right">

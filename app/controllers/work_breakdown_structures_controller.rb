@@ -2,17 +2,13 @@ class WorkBreakdownStructuresController < ApplicationController
   before_action :set_work_breakdown_structure, only: [:show, :edit, :update, :destroy]
 
   def save_structure
-    wbs = ActiveSupport::JSON.decode(params[:wbs])
+    wbs = ActiveSupport::JSON.decode(params[:structure])
 
-    wbs.each do |item| 
-      curr = WorkBreakdownStructure.find(item["id"].to_i)
-      curr.parent = item["parent"].to_i
-      curr.level = item["level"].to_i
-      curr.save
-    end
+    parent = WorkBreakdownStructure.where('project_id = ? AND parent = 0', params[:project_id]).first
+    save_element_structure(wbs, parent.id, 1, WorkBreakdownStructure)
 
     respond_to do |format|
-      format.json { render :json => "OK" }
+      format.json { head :no_content }
     end
   end
   

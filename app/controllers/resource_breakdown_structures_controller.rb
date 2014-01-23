@@ -1,6 +1,17 @@
 class ResourceBreakdownStructuresController < ApplicationController
   before_action :set_resource_breakdown_structure, only: [:show, :edit, :update, :destroy]
 
+  def save_structure
+    rbs = ActiveSupport::JSON.decode(params[:structure])
+
+    parent = ResourceBreakdownStructure.where('project_id = ? AND parent = 0', params[:project_id]).first
+    save_element_structure(rbs, parent.id, 1, ResourceBreakdownStructure)
+
+    respond_to do |format|
+      format.json { head :no_content }
+    end
+  end
+
   def index
     @project = Project.find(params[:project_id])
     @resource_breakdown_structure = ResourceBreakdownStructure.new(project: @project)

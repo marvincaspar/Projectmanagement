@@ -28,13 +28,23 @@ function ready() {
   jQuery('.dd').nestable({ 
     listNodeName: 'ul',
     maxDepth: 100,
-  }).nestable('collapseAll');
+  })
+  .nestable('collapseAll')
+  .on('change', updateOrder);
 
   jQuery('.dd-content .glyphicon-eye-open, .dd-content .glyphicon-plus-sign').click(function(){
     var element = jQuery(this).parents('.dd-content');
 
     jQuery('.dd-content').removeClass('active');
     element.addClass('active');
+  });
+
+  jQuery("#overlay").css({
+    opacity : 0.5,
+    top     : 0,
+    bottom  : 0,
+    left    : 0,
+    right   : 0,
   });
 
   initProject();
@@ -85,3 +95,21 @@ function clearForm(htmlObject) {
   htmlObject.find('textarea').val('');
 }
 
+var updateOrder = function(e)
+{
+    var list   = e.length ? e : $(e.target)
+    
+    //console.log(window.JSON.stringify(list.nestable('serialize')));
+
+    jQuery("#overlay").fadeIn();
+    jQuery.ajax({
+      type: 'POST',
+      data: { structure: JSON.stringify(list.nestable('serialize')) },
+      url: save_structure
+    }).done(function ( data ) {
+      jQuery("#overlay").fadeOut();
+    }).fail(function ( data ) {
+      alert('error');
+      console.log(data);
+    });
+};

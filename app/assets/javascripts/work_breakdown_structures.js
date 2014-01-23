@@ -84,4 +84,21 @@ function initWbs() {
       alert('error');
     });
   });
+
+  // jQuery('.dd').on('change', function() {
+
+  //   console.log(jQuery('.dd').nestable('serialize'));
+
+  //   return false;
+
+  //   jQuery.ajax({
+  //     type: 'POST',
+  //     data: { wbs: JSON.stringify(jQuery('.dd').nestable('serialize')) },
+  //     url: wbs_save_structure,
+  //     success: function(data) {
+  //       alert("ok");
+  //       console.log(data);
+  //     }
+  //   });
+  // });
 }

@@ -1,5 +1,16 @@
 class ProductBreakdownStructuresController < ApplicationController
   before_action :set_product_breakdown_structure, only: [:show, :edit, :update, :destroy]
+
+  def save_structure
+    pbs = ActiveSupport::JSON.decode(params[:structure])
+
+    parent = ProductBreakdownStructure.where('project_id = ? AND parent = 0', params[:project_id]).first
+    save_element_structure(pbs, parent.id, 1, ProductBreakdownStructure)
+
+    respond_to do |format|
+      format.json { head :no_content }
+    end
+  end
   
   def index
     @project = Project.find(params[:project_id])

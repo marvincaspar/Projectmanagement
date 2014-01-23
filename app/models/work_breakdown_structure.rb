@@ -10,6 +10,7 @@ class WorkBreakdownStructure < ActiveRecord::Base
   def self.order_for_selects(project_id)
     output = []
     arr = WorkBreakdownStructure.where('project_id = ?', project_id)
+                                .order('work_breakdown_structures.level ASC, work_breakdown_structures.parent ASC, work_breakdown_structures.order ASC')
 
     root = arr.where('level = 0').first
 

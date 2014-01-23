@@ -5,7 +5,11 @@ Projectmanagement::Application.routes.draw do
     get "home/index"
 
     resources :projects do
-      resources :product_breakdown_structures
+      resources :product_breakdown_structures do
+        collection do
+          post :save_structure
+        end
+      end
 
       resources :work_breakdown_structures do
         collection do
@@ -17,6 +21,7 @@ Projectmanagement::Application.routes.draw do
 
       resources :resource_breakdown_structures do
         collection do
+          post :save_structure
           resources :resources, only: [:create]
         end
         resources :resources, only: [:show, :edit, :update, :destroy]

@@ -22,6 +22,7 @@ class ResourceBreakdownStructure < ActiveRecord::Base
   def self.order_for_selects(project_id)
     output = []
     arr = ResourceBreakdownStructure.where('project_id = ?', project_id)
+                                    .order('resource_breakdown_structures.level ASC, resource_breakdown_structures.parent ASC, resource_breakdown_structures.order ASC')
 
     root = arr.where('level = 0').first
 

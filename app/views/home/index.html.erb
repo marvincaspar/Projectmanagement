@@ -19,7 +19,9 @@
             <p>
               <%= link_to '<span class="glyphicon glyphicon-eye-open"></span>'.html_safe, project, { class: 'btn btn-primary' } %>
               <%#= link_to '<span class="glyphicon glyphicon-pencil"></span>'.html_safe, edit_project_path(project), { class: 'btn btn-primary' } %>
-              <%= link_to '<span class="glyphicon glyphicon-trash"></span>'.html_safe, project, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+              <% if can? :manage, project %>
+                <%= link_to '<span class="glyphicon glyphicon-trash"></span>'.html_safe, project, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+              <% end %>
             </p>
           </div>
         </div>

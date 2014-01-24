@@ -183,7 +183,7 @@ ActiveRecord::Schema.define(version: 20140120142538) do
 
   create_table "work_packages", force: true do |t|
     t.string   "name"
-    t.integer  "owner_id"
+    t.integer  "user_id"
     t.integer  "released_by_id"
     t.datetime "released_on"
     t.text     "description"
@@ -200,7 +200,7 @@ ActiveRecord::Schema.define(version: 20140120142538) do
     t.datetime "updated_at"
   end
 
-  add_index "work_packages", ["owner_id"], name: "index_work_packages_on_owner_id", using: :btree
+  add_index "work_packages", ["user_id"], name: "index_work_packages_on_user_id", using: :btree
   add_index "work_packages", ["project_id"], name: "index_work_packages_on_project_id", using: :btree
   add_index "work_packages", ["released_by_id"], name: "index_work_packages_on_released_by_id", using: :btree
   add_index "work_packages", ["work_breakdown_structure_id"], name: "index_work_packages_on_work_breakdown_structure_id", using: :btree

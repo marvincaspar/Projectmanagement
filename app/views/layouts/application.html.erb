@@ -117,8 +117,12 @@
       </div>
     <% else %>
       <div class="col-md-6 col-md-offset-3">
-        <%= render "users/sessions/login" %>
-        <%= render "users/shared/links" %>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <%= render "users/sessions/login" %>
+            <%= render "users/shared/links" %>
+          </div>
+        </div>
       </div>
     <% end %>
   </div>

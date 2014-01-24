@@ -1,4 +1,6 @@
 class MilestonesController < ApplicationController
+  load_and_authorize_resource :project
+  before_filter :authenticate_user!
   before_action :set_milestone, only: [:show, :edit, :update, :destroy]
 
   def index

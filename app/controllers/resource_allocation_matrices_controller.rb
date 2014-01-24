@@ -1,4 +1,6 @@
 class ResourceAllocationMatricesController < ApplicationController
+  load_and_authorize_resource :project
+  before_filter :authenticate_user!
   before_action :set_resource_allocation_matrix, only: [:show, :edit, :update, :destroy]
 
   def index

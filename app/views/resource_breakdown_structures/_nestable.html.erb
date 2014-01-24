@@ -28,15 +28,19 @@
         <% end %>
 
         <li class="dd-item" data-id="<%= r.id %>" data-type="structure">
-          <div class="dd-handle"></div>
+          <% if can? :manage, @project => ResourceBreakdownStructure %>
+            <div class="dd-handle"></div>
+          <% end %>
           <div class="dd-content">
             <span class="glyphicon glyphicon-folder-open"></span>&nbsp;
             <%= r.name %>
             <div class="pull-right">
-              <span class="glyphicon glyphicon-plus-sign"></span>
               <span class="glyphicon glyphicon-eye-open show-rbs"></span>
-              <span class="glyphicon glyphicon-pencil edit-rbs"></span>
-              <%= link_to '', project_resource_breakdown_structure_path(project_id: params[:project_id], id: r.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'glyphicon glyphicon-trash' %>
+              <% if can? :manage, @project => ResourceBreakdownStructure %>
+                <span class="glyphicon glyphicon-plus-sign"></span>
+                <span class="glyphicon glyphicon-pencil edit-rbs"></span>
+                <%= link_to '', project_resource_breakdown_structure_path(project_id: params[:project_id], id: r.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'glyphicon glyphicon-trash' %>
+              <% end %>
             </div>
           </div>
 
@@ -49,8 +53,10 @@
                     <%= re.qualification.name %>
                     <div class="pull-right">
                       <span class="glyphicon glyphicon-eye-open show-r"></span>
-                      <span class="glyphicon glyphicon-pencil edit-r"></span>
-                      <%= link_to '', project_resource_breakdown_structure_resource_path(project_id: params[:project_id], resource_breakdown_structure_id: r.id, id: re.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'glyphicon glyphicon-trash' %>
+                      <% if can? :manage, @project => ResourceBreakdownStructure %>
+                        <span class="glyphicon glyphicon-pencil edit-r"></span>
+                        <%= link_to '', project_resource_breakdown_structure_resource_path(project_id: params[:project_id], resource_breakdown_structure_id: r.id, id: re.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'glyphicon glyphicon-trash' %>
+                      <% end %>
                     </div>
                   </div>
                 </li>

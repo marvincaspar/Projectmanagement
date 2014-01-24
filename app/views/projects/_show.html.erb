@@ -5,9 +5,11 @@
   <%= @project.description %>
 </p>
 <p>
-  <span class="btn btn-primary show_form">
-    <span class="glyphicon glyphicon-pencil"></span>
-  </span>
-  <%#= link_to '<span class="glyphicon glyphicon-pencil"></span>'.html_safe, edit_project_path(@project), { class: 'btn btn-primary show_form' } %>
-  <%= link_to '<span class="glyphicon glyphicon-trash"></span>'.html_safe, @project, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+  <% if can? :manage, @project %>
+    <span class="btn btn-primary show_form">
+      <span class="glyphicon glyphicon-pencil"></span>
+    </span>
+    <%#= link_to '<span class="glyphicon glyphicon-pencil"></span>'.html_safe, edit_project_path(@project), { class: 'btn btn-primary show_form' } %>
+    <%= link_to '<span class="glyphicon glyphicon-trash"></span>'.html_safe, @project, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+  <% end %>
 </p>

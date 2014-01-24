@@ -1,7 +1,7 @@
 function initRbs() {
   jQuery('.show-rbs').click(function() {
     var id = jQuery(this).parents('.dd-item').data('id');
-    var show_url = rbs_show_url.replace(':rbs_id', id);
+    var show_url = rbs_show_url.replace(':id', id);
 
     jQuery.ajax({
       type: 'GET',

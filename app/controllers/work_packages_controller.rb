@@ -1,4 +1,6 @@
 class WorkPackagesController < ApplicationController
+  load_and_authorize_resource :project
+  before_filter :authenticate_user!
   before_action :set_work_package, only: [:show, :edit, :update, :destroy]
 
   def create

@@ -40,7 +40,9 @@
                     <%= wp.name %>
                     <div class="pull-right">
                       <span class="glyphicon glyphicon-eye-open show-wp"></span>
-                      <span class="glyphicon glyphicon-pencil"></span>
+                      <% if can? :manage, @project => ResourceAllocationMatrix %>
+                        <span class="glyphicon glyphicon-pencil"></span>
+                      <% end %>
                     </div>
                   </div>
                 </li>

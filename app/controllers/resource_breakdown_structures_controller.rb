@@ -1,4 +1,6 @@
 class ResourceBreakdownStructuresController < ApplicationController
+  load_and_authorize_resource :project
+  before_filter :authenticate_user!
   before_action :set_resource_breakdown_structure, only: [:show, :edit, :update, :destroy]
 
   def save_structure

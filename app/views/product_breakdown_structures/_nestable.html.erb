@@ -25,14 +25,18 @@
         <% end %>
 
         <li class="dd-item" data-id="<%= p.id %>" data-type="structure">
-          <div class="dd-handle"></div>
+          <% if can? :manage, @project => ProductBreakdownStructure %>
+            <div class="dd-handle"></div>
+          <% end %>
           <div class="dd-content">
             <%= p.name %>
             <div class="pull-right">
-              <span class="glyphicon glyphicon-plus-sign"></span>
               <span class="glyphicon glyphicon-eye-open"></span>
-              <span class="glyphicon glyphicon-pencil"></span>
-              <%= link_to '', project_product_breakdown_structure_path(project_id: params[:project_id], id: p.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'glyphicon glyphicon-trash' %>
+              <% if can? :manage, @project => ProductBreakdownStructure %>
+                <span class="glyphicon glyphicon-plus-sign"></span>
+                <span class="glyphicon glyphicon-pencil"></span>
+                <%= link_to '', project_product_breakdown_structure_path(project_id: params[:project_id], id: p.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'glyphicon glyphicon-trash' %>
+              <% end %>
             </div>
           </div>
 

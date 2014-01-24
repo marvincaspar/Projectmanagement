@@ -2,7 +2,7 @@ class CreateWorkPackages < ActiveRecord::Migration
   def change
     create_table :work_packages do |t|
       t.string :name
-      t.references :owner, index: true
+      t.references :user, index: true
       t.references :released_by, index: true
       t.datetime :released_on
       t.text :description

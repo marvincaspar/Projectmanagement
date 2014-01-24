@@ -2,31 +2,38 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    # Define abilities for the passed in user here. For example:
-    #
-    #   user ||= User.new # guest user (not logged in)
-    #   if user.admin?
-    #     can :manage, :all
-    #   else
-    #     can :read, :all
-    #   end
-    #
-    # The first argument to `can` is the action you are giving the user 
-    # permission to do.
-    # If you pass :manage it will apply to every action. Other common actions
-    # here are :read, :create, :update and :destroy.
-    #
-    # The second argument is the resource the user can perform the action on. 
-    # If you pass :all it will apply to every resource. Otherwise pass a Ruby
-    # class of the resource.
-    #
-    # The third argument is an optional hash of conditions to further filter the
-    # objects.
-    # For example, here the user can only update published articles.
-    #
-    #   can :update, Article, :published => true
-    #
-    # See the wiki for details:
-    # https://github.com/ryanb/cancan/wiki/Defining-Abilities
+    # guest user (not logged in)
+    @user = user ||= User.new
+
+    # Handle each user role within own method
+    @user.roles.each { |role| send(role.name.downcase) }
+
+    # for guest without roles
+    if @user.roles.empty?
+      guest
+    end
+  end
+
+  # Define guest role
+  def user
+    can :read, :all
+  end
+
+  # Define viewer role (assigned by default to every registered user)
+  def projectowner
+    user
+    can :manage, Project, user_id: @user.id
+    can :manage, ProductBreakdownStructure, project: { user_id: @user.id }
+    can :manage, Qualification, project: { user_id: @user.id }
+    can :manage, Milestone, project: { user_id: @user.id }
+    can :manage, Resource, project: { user_id: @user.id }
+    can :manage, ResourceAllocationMatrix, project: { user_id: @user.id }
+    can :manage, ResourceBreakdownStructure, project: { user_id: @user.id }
+    can :manage, WorkBreakdownStructure, project: { user_id: @user.id }
+    can :manage, WorkPackage, project: { user_id: @user.id }
+  end
+
+  def admin
+    user
   end
 end

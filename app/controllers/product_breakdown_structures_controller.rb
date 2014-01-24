@@ -1,4 +1,5 @@
 class ProductBreakdownStructuresController < ApplicationController
+  before_filter :authenticate_user!
   before_action :set_product_breakdown_structure, only: [:show, :edit, :update, :destroy]
 
   def save_structure

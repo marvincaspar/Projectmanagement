@@ -17,6 +17,7 @@ class Ability
   # Define guest role
   def user
     can :read, :all
+    can :create, Project
   end
 
   # Define viewer role (assigned by default to every registered user)

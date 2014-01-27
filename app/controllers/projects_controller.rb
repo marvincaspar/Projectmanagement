@@ -18,7 +18,7 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.save
-        current_user.add_role :project_admin, @project
+        current_user.add_role :projectowner, @project
         ProductBreakdownStructure.create name: @project.name, level: 0, parent: 0, order: 0, user: current_user, project: @project
         WorkBreakdownStructure.create name: @project.name, level: 0, parent: 0, order: 0, user: current_user, project: @project
         ResourceBreakdownStructure.create name: @project.name, level: 0, parent: 0, order: 0, user: current_user, resource: :personal, resource_type: :intern, project: @project  

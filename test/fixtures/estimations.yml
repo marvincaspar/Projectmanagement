@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  iteration_id: 
+  user_id: 
+  effort: 1
+
+two:
+  iteration_id: 
+  user_id: 
+  effort: 1

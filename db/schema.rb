@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140120142538) do
+ActiveRecord::Schema.define(version: 20140127082636) do
 
   create_table "attachments", force: true do |t|
     t.datetime "created_at"
@@ -26,6 +26,37 @@ ActiveRecord::Schema.define(version: 20140120142538) do
     t.integer "attachment_id",   null: false
     t.integer "work_package_id", null: false
   end
+
+  create_table "comments", force: true do |t|
+    t.integer  "estimation_id"
+    t.text     "content"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["estimation_id"], name: "index_comments_on_estimation_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
+  create_table "estimations", force: true do |t|
+    t.integer  "iteration_id"
+    t.integer  "user_id"
+    t.integer  "effort"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "estimations", ["iteration_id"], name: "index_estimations_on_iteration_id", using: :btree
+  add_index "estimations", ["user_id"], name: "index_estimations_on_user_id", using: :btree
+
+  create_table "iterations", force: true do |t|
+    t.integer  "work_package_id"
+    t.boolean  "open",            default: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "iterations", ["work_package_id"], name: "index_iterations_on_work_package_id", using: :btree
 
   create_table "milestones", force: true do |t|
     t.string   "name"
@@ -200,9 +231,9 @@ ActiveRecord::Schema.define(version: 20140120142538) do
     t.datetime "updated_at"
   end
 
-  add_index "work_packages", ["user_id"], name: "index_work_packages_on_user_id", using: :btree
   add_index "work_packages", ["project_id"], name: "index_work_packages_on_project_id", using: :btree
   add_index "work_packages", ["released_by_id"], name: "index_work_packages_on_released_by_id", using: :btree
+  add_index "work_packages", ["user_id"], name: "index_work_packages_on_user_id", using: :btree
   add_index "work_packages", ["work_breakdown_structure_id"], name: "index_work_packages_on_work_breakdown_structure_id", using: :btree
 
 end

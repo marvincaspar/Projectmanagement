@@ -24,7 +24,7 @@ class WorkPackagesController < ApplicationController
 
   def show
     respond_to do |format|
-      format.json { render json: @work_package.to_json(:include => :work_breakdown_structure) }
+      format.json { render json: @work_package.to_json(include: :work_breakdown_structure) }
     end
   end
 

@@ -18,11 +18,23 @@
 
 @import "bootstrap";
 
+html {
+  height: 101%;
+}
 
 body { 
   background-image: image-url("bg.png");
   background-repeat: repeat;
-  padding-top: 70px; 
+  padding-top: 70px;
+}
+
+.row.main {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.text-muted a {
+  color: #999999;
 }
 
 label.thin {
@@ -47,4 +59,11 @@ label.thin {
     top: 50%;
     left: 50%;
   }
+}
+
+#notice_div {
+  z-index: 1060;
+  position: fixed;
+  bottom: 0px;
+  margin-left: 20px;
 }

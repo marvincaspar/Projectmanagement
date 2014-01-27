@@ -27,21 +27,11 @@ ActiveRecord::Schema.define(version: 20140127082636) do
     t.integer "work_package_id", null: false
   end
 
-  create_table "comments", force: true do |t|
-    t.integer  "estimation_id"
-    t.text     "content"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "comments", ["estimation_id"], name: "index_comments_on_estimation_id", using: :btree
-  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
-
   create_table "estimations", force: true do |t|
     t.integer  "iteration_id"
     t.integer  "user_id"
     t.integer  "effort"
+    t.text     "message"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

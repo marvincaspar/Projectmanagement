@@ -10,7 +10,7 @@ class Ability
 
     # for guest without roles
     if @user.roles.empty?
-      guest
+      
     end
   end
 

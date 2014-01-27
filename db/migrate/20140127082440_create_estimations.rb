@@ -4,6 +4,7 @@ class CreateEstimations < ActiveRecord::Migration
       t.references :iteration, index: true
       t.references :user, index: true
       t.integer :effort
+      t.text :message
 
       t.timestamps
     end

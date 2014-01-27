@@ -8,6 +8,8 @@ user1 = User.create email: "user1@example.com", password: "password"
 user1.add_role :user
 user2 = User.create email: "user2@example.com", password: "password"
 user2.add_role :user
+user3 = User.create email: "user3@example.com", password: "password"
+user3.add_role :user
 puts " done"
 
 
@@ -15,10 +17,10 @@ print "Create Project"
 # ============ Project ============
 auto = Project.create name: 'PKW', description: 'Wir bauen ein Auto', user: user1
 user1.add_role :projectowner, auto
-project1 = Project.create name: 'Project #1', description: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et...', user: admin
-admin.add_role :projectowner, project1
-project2 = Project.create name: 'Project #2', description: 'Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit...', user: user1
-user1.add_role :projectowner, project2
+project1 = Project.create name: 'Project #1', description: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et...', user: user2
+user2.add_role :projectowner, project1
+project2 = Project.create name: 'Project #2', description: 'Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit...', user: user3
+user3.add_role :projectowner, project2
 puts " done"
 
 
@@ -110,12 +112,12 @@ wp_04 = WorkPackage.create name: 'Komponentenentwurf', parent: wp_02.id, start: 
 wp_05 = WorkPackage.create name: 'Komponententest', parent: wp_02.id, start: Date.today, end: Date.today + 3, cost: 100, work_breakdown_structure_id: wbs_motorhaube.id, project: auto, user: user1, risk: :medium, description: 'Lorem ipsum dolor sit amet,...', resources: 'Lorem ipsum dolor sit amet,...', target: 'Lorem ipsum dolor sit amet,...'
 wp_06 = WorkPackage.create name: 'Implementierungstest', parent: wp_02.id, start: Date.today, end: Date.today + 3, cost: 100, work_breakdown_structure_id: wbs_motorhaube.id, project: auto, user: user1, risk: :medium, description: 'Lorem ipsum dolor sit amet,...', resources: 'Lorem ipsum dolor sit amet,...', target: 'Lorem ipsum dolor sit amet,...'
 
-wp_01 = WorkPackage.create name: 'Entwurf', parent: 0, start: Date.today, end: Date.today + 3, cost: 100, work_breakdown_structure_id: wbs_tuer.id, project: auto, user: user1, risk: :medium, description: 'Lorem ipsum dolor sit amet,...', resources: 'Lorem ipsum dolor sit amet,...', target: 'Lorem ipsum dolor sit amet,...'
-wp_02 = WorkPackage.create name: 'Konstruktion', parent: 0, start: Date.today, end: Date.today + 3, cost: 100, work_breakdown_structure_id: wbs_tuer.id, project: auto, user: user1, risk: :medium, description: 'Lorem ipsum dolor sit amet,...', resources: 'Lorem ipsum dolor sit amet,...', target: 'Lorem ipsum dolor sit amet,...'
-wp_03 = WorkPackage.create name: 'Produktion', parent: 0, start: Date.today, end: Date.today + 3, cost: 100, work_breakdown_structure_id: wbs_tuer.id, project: auto, user: user1, risk: :medium, description: 'Lorem ipsum dolor sit amet,...', resources: 'Lorem ipsum dolor sit amet,...', target: 'Lorem ipsum dolor sit amet,...'
-wp_04 = WorkPackage.create name: 'Komponentenentwurf', parent: wp_02.id, start: Date.today, end: Date.today + 3, cost: 100, work_breakdown_structure_id: wbs_tuer.id, project: auto, user: user1, risk: :medium, description: 'Lorem ipsum dolor sit amet,...', resources: 'Lorem ipsum dolor sit amet,...', target: 'Lorem ipsum dolor sit amet,...'
-wp_05 = WorkPackage.create name: 'Komponententest', parent: wp_02.id, start: Date.today, end: Date.today + 3, cost: 100, work_breakdown_structure_id: wbs_tuer.id, project: auto, user: user1, risk: :medium, description: 'Lorem ipsum dolor sit amet,...', resources: 'Lorem ipsum dolor sit amet,...', target: 'Lorem ipsum dolor sit amet,...'
-wp_06 = WorkPackage.create name: 'Implementierungstest', parent: wp_02.id, start: Date.today, end: Date.today + 3, cost: 100, work_breakdown_structure_id: wbs_tuer.id, project: auto, user: user1, risk: :medium, description: 'Lorem ipsum dolor sit amet,...', resources: 'Lorem ipsum dolor sit amet,...', target: 'Lorem ipsum dolor sit amet,...'
+e_wp_01 = wp_01 = WorkPackage.create name: 'Entwurf', parent: 0, start: Date.today, end: Date.today + 3, cost: 100, work_breakdown_structure_id: wbs_tuer.id, project: auto, user: user1, risk: :medium, description: 'Lorem ipsum dolor sit amet,...', resources: 'Lorem ipsum dolor sit amet,...', target: 'Lorem ipsum dolor sit amet,...'
+e_wp_02 = wp_02 = WorkPackage.create name: 'Konstruktion', parent: 0, start: Date.today, end: Date.today + 3, cost: 100, work_breakdown_structure_id: wbs_tuer.id, project: auto, user: user1, risk: :medium, description: 'Lorem ipsum dolor sit amet,...', resources: 'Lorem ipsum dolor sit amet,...', target: 'Lorem ipsum dolor sit amet,...'
+e_wp_03 = wp_03 = WorkPackage.create name: 'Produktion', parent: 0, start: Date.today, end: Date.today + 3, cost: 100, work_breakdown_structure_id: wbs_tuer.id, project: auto, user: user1, risk: :medium, description: 'Lorem ipsum dolor sit amet,...', resources: 'Lorem ipsum dolor sit amet,...', target: 'Lorem ipsum dolor sit amet,...'
+e_wp_04 = wp_04 = WorkPackage.create name: 'Komponentenentwurf', parent: wp_02.id, start: Date.today, end: Date.today + 3, cost: 100, work_breakdown_structure_id: wbs_tuer.id, project: auto, user: user1, risk: :medium, description: 'Lorem ipsum dolor sit amet,...', resources: 'Lorem ipsum dolor sit amet,...', target: 'Lorem ipsum dolor sit amet,...'
+e_wp_05 = wp_05 = WorkPackage.create name: 'Komponententest', parent: wp_02.id, start: Date.today, end: Date.today + 3, cost: 100, work_breakdown_structure_id: wbs_tuer.id, project: auto, user: user1, risk: :medium, description: 'Lorem ipsum dolor sit amet,...', resources: 'Lorem ipsum dolor sit amet,...', target: 'Lorem ipsum dolor sit amet,...'
+e_wp_06 = wp_06 = WorkPackage.create name: 'Implementierungstest', parent: wp_02.id, start: Date.today, end: Date.today + 3, cost: 100, work_breakdown_structure_id: wbs_tuer.id, project: auto, user: user1, risk: :medium, description: 'Lorem ipsum dolor sit amet,...', resources: 'Lorem ipsum dolor sit amet,...', target: 'Lorem ipsum dolor sit amet,...'
 
 wp_01 = WorkPackage.create name: 'Entwurf', parent: 0, start: Date.today, end: Date.today + 3, cost: 100, work_breakdown_structure_id: wbs_motorblock.id, project: auto, user: user1, risk: :medium, description: 'Lorem ipsum dolor sit amet,...', resources: 'Lorem ipsum dolor sit amet,...', target: 'Lorem ipsum dolor sit amet,...'
 wp_02 = WorkPackage.create name: 'Konstruktion', parent: 0, start: Date.today, end: Date.today + 3, cost: 100, work_breakdown_structure_id: wbs_motorblock.id, project: auto, user: user1, risk: :medium, description: 'Lorem ipsum dolor sit amet,...', resources: 'Lorem ipsum dolor sit amet,...', target: 'Lorem ipsum dolor sit amet,...'
@@ -186,6 +188,29 @@ wp_03 = WorkPackage.create name: 'Produktion', parent: 0, start: Date.today, end
 wp_04 = WorkPackage.create name: 'Komponentenentwurf', parent: wp_02.id, start: Date.today, end: Date.today + 3, cost: 100, work_breakdown_structure_id: wbs_felge4.id, project: auto, user: user1, risk: :medium, description: 'Lorem ipsum dolor sit amet,...', resources: 'Lorem ipsum dolor sit amet,...', target: 'Lorem ipsum dolor sit amet,...'
 wp_05 = WorkPackage.create name: 'Komponententest', parent: wp_02.id, start: Date.today, end: Date.today + 3, cost: 100, work_breakdown_structure_id: wbs_felge4.id, project: auto, user: user1, risk: :medium, description: 'Lorem ipsum dolor sit amet,...', resources: 'Lorem ipsum dolor sit amet,...', target: 'Lorem ipsum dolor sit amet,...'
 wp_06 = WorkPackage.create name: 'Implementierungstest', parent: wp_02.id, start: Date.today, end: Date.today + 3, cost: 100, work_breakdown_structure_id: wbs_felge4.id, project: auto, user: user1, risk: :medium, description: 'Lorem ipsum dolor sit amet,...', resources: 'Lorem ipsum dolor sit amet,...', target: 'Lorem ipsum dolor sit amet,...'
+puts " done"
+
+
+print "Create Estimation for Tür"
+# ============ Estimation ============
+Estimation.create iteration: e_wp_01.iterations.last, user: user2, effort: 3
+Estimation.create iteration: e_wp_01.iterations.last, user: user3, effort: 14, message: 'Schätzung ist viel zu hoch!'
+i = e_wp_01.iterations.last
+i.open = false
+i.save
+Iteration.create work_package: e_wp_01
+Estimation.create iteration: e_wp_01.iterations.last, user: user2, effort: 3
+Estimation.create iteration: e_wp_01.iterations.last, user: user3, effort: 5
+Estimation.create iteration: e_wp_02.iterations.last, user: user2, effort: 2
+Estimation.create iteration: e_wp_02.iterations.last, user: user3, effort: 2
+Estimation.create iteration: e_wp_03.iterations.last, user: user2, effort: 1
+Estimation.create iteration: e_wp_03.iterations.last, user: user3, effort: 4
+Estimation.create iteration: e_wp_04.iterations.last, user: user2, effort: 8
+Estimation.create iteration: e_wp_04.iterations.last, user: user3, effort: 2
+Estimation.create iteration: e_wp_05.iterations.last, user: user2, effort: 3
+Estimation.create iteration: e_wp_05.iterations.last, user: user3, effort: 1
+Estimation.create iteration: e_wp_06.iterations.last, user: user2, effort: 9
+Estimation.create iteration: e_wp_06.iterations.last, user: user3, effort: 7
 puts " done"
 
 

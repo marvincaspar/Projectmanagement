@@ -1,7 +1,7 @@
 function initWbs() {
   jQuery('.show-wbs').click(function() {
     var id = jQuery(this).parents('.dd-item').data('id');
-    var show_url = wbs_show_url.replace(':wbs_id', id);
+    var show_url = wbs_show_url.replace(':id', id);
 
     jQuery.ajax({
       type: 'GET',
@@ -56,6 +56,7 @@ function initWbs() {
       dataType : 'json'
     }).done(function ( data ) {
       jQuery('#wbs_show').hide();
+      jQuery('#wp_show').hide();
       fillForm(data, jQuery('#wbs_form'));
       // jQuery('#work_package_id').val(id);
       jQuery('#form').show();
@@ -76,29 +77,12 @@ function initWbs() {
       dataType : 'json'
     }).done(function ( data ) {
       jQuery('#wbs_show').hide();
+      jQuery('#wp_show').hide();
       fillForm(data, jQuery('#wp_form'));
-      // jQuery('#work_package_id').val(id);
       jQuery('#form').show();
       jQuery('.nav-tabs  a[href="#wp_form"]').tab('show');
     }).fail(function ( data ) {
       alert('error');
     });
   });
-
-  // jQuery('.dd').on('change', function() {
-
-  //   console.log(jQuery('.dd').nestable('serialize'));
-
-  //   return false;
-
-  //   jQuery.ajax({
-  //     type: 'POST',
-  //     data: { wbs: JSON.stringify(jQuery('.dd').nestable('serialize')) },
-  //     url: wbs_save_structure,
-  //     success: function(data) {
-  //       alert("ok");
-  //       console.log(data);
-  //     }
-  //   });
-  // });
 }

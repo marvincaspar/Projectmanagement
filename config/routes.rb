@@ -32,6 +32,13 @@ Projectmanagement::Application.routes.draw do
       resources :resource_allocation_matrices
       
       resources :milestones
+
+      resources :iterations do
+        collection do
+          get :comment_html
+        end
+        resources :estimations
+      end
     end
 
     devise_for :users, 

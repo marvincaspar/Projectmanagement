@@ -18,4 +18,8 @@ module ApplicationHelper
   def devise_mapping
     @devise_mapping ||= Devise.mappings[:user]
   end
+
+  def show_notice(message, status)
+    javascript_tag("showNotice('#{message}','#{status}');")
+  end
 end

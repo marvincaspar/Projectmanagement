@@ -53,6 +53,7 @@ function ready() {
   initRbs();
   initRam();
   initMilestone();
+  initIteration();
 }
 
 jQuery(document).ready(ready)
@@ -97,9 +98,7 @@ function clearForm(htmlObject) {
 
 var updateOrder = function(e)
 {
-    var list   = e.length ? e : $(e.target)
-    
-    //console.log(window.JSON.stringify(list.nestable('serialize')));
+    var list   = e.length ? e : $(e.target);
 
     jQuery("#overlay").fadeIn();
     jQuery.ajax({
@@ -113,3 +112,15 @@ var updateOrder = function(e)
       console.log(data);
     });
 };
+
+function showNotice(message, status, fadeOutValue) {
+  var fadeOutValue = 3000;
+
+  var notice_div = jQuery("<div class='alert alert-" + status + " alert-dismissable'><button type='button' class='close' data-dismiss='alert'>×</button>" + message + "</div>");
+
+  jQuery("#notice_div").append(notice_div);
+
+  notice_div.animate({
+    opacity : '+=0'
+  }, 3000).fadeOut(fadeOutValue);
+}

@@ -56,8 +56,8 @@ function initRbs() {
       dataType : 'json'
     }).done(function ( data ) {
       jQuery('#rbs_show').hide();
+      jQuery('#r_show').hide();
       fillForm(data, jQuery('#rbs_form'));
-      // jQuery('#work_package_id').val(id);
       jQuery('#form').show();
       jQuery('.nav-tabs  a[href="#rbs_form"]').tab('show');
     }).fail(function ( data ) {
@@ -76,8 +76,8 @@ function initRbs() {
       dataType : 'json'
     }).done(function ( data ) {
       jQuery('#rbs_show').hide();
+      jQuery('#r_show').hide();
       fillForm(data, jQuery('#r_form'));
-      // jQuery('#work_package_id').val(id);
       jQuery('#form').show();
       jQuery('.nav-tabs  a[href="#r_form"]').tab('show');
     }).fail(function ( data ) {

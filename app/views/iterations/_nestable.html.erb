@@ -1,9 +1,16 @@
 <script type="text/javascript">
+  var wbs_show_url = "<%= project_work_breakdown_structure_path(project_id: params[:project_id], id: ':id') %>";
   var wp_show_url = "<%= project_work_breakdown_structure_work_package_path(project_id: params[:project_id], work_breakdown_structure_id: ':wbs_id', id: ':id') %>";
-  var ram_edit_url = "<%= edit_project_resource_allocation_matrix_path(project_id: params[:project_id], id: ':id') %>";
+
+  var expert_edit_url = "<%= project_iteration_estimation_path(project_id: params[:project_id], iteration_id: ':iteration_id', id: ':id') %>";
+  var projectowner_show_url = "<%= project_iteration_path(project_id: params[:project_id], id: '_work_package_id') %>";
+  var create_iteration_url = "<%= project_iterations_path(project_id: params[:project_id]) %>";
+
+  var comment_html_url = "<%= comment_html_project_iterations_path(project_id: params[:project_id]) %>";
+  var add_comment_url = "<%= project_iteration_estimation_path(project_id: params[:project_id], iteration_id: ':iteration_id', id: ':id') %>";
 </script>
 <div class="dd">
-  <ul class="dd-list ram">
+  <ul class="dd-list wbs">
     <% prev_level = 0 %>
     <% first_turn = true %>
     <% WorkBreakdownStructure.order_for_selects(params[:project_id]).each do |p| %>
@@ -22,26 +29,28 @@
           </li>
         <% end %>
 
-        <li class="dd-item" data-id="<%= p.id %>">
+        <li class="dd-item" data-id="<%= p.id %>" data-type="structure">
           <div class="dd-content">
             <span class="glyphicon glyphicon-folder-open"></span>&nbsp;
             <%= p.name %>
-            <!-- <div class="pull-right">
+            <div class="pull-right">
               <span class="glyphicon glyphicon-eye-open show-wbs"></span>
-            </div> -->
+            </div>
           </div>
 
           <% if p.work_packages.count > 0 %>
             <ul class="dd-list wp">
               <% p.work_packages.each do |wp| %>
-                <li class="dd-item" data-id="<%= wp.id %>" data-ram-id="<%= wp.resource_allocation_matrix ? wp.resource_allocation_matrix.id : 0 %>">
+                <li class="dd-item" data-id="<%= wp.id %>" data-iteration="<%= wp.iterations.last.id %>" data-type="package">
                   <div class="dd-content">
                     <span class="glyphicon glyphicon-file"></span>&nbsp;
                     <%= wp.name %>
                     <div class="pull-right">
                       <span class="glyphicon glyphicon-eye-open show-wp"></span>
-                      <% if can? :manage, @project => ResourceAllocationMatrix %>
-                        <span class="glyphicon glyphicon-pencil"></span>
+                      <% if can? :manage, @project %>
+                        <span class="glyphicon glyphicon-time show-projectowner"></span>
+                      <% else %>
+                        <span class="glyphicon glyphicon-time show-expert"></span>
                       <% end %>
                     </div>
                   </div>

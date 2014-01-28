@@ -7,7 +7,7 @@ class WorkPackagesController < ApplicationController
     set_work_package
 
     @work_package.update(work_package_params)
-    @work_package.owner = current_user
+    @work_package.user = current_user
     @work_package.project_id = params[:project_id]
     @work_package.work_breakdown_structure_id = params[:work_breakdown_structure_id]
 
@@ -45,7 +45,9 @@ class WorkPackagesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_work_package
-      @work_package = WorkPackage.find(params[:id])
+      unless params[:id].blank?
+        @work_package = WorkPackage.find(params[:id])
+      end
       if @work_package.nil?
         @work_package = WorkPackage.new(project: @project) 
       end

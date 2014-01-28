@@ -73,7 +73,9 @@ class WorkBreakdownStructuresController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_work_breakdown_structure
-      @work_breakdown_structure = WorkBreakdownStructure.find(params[:id])
+      unless params[:id].blank?
+        @work_breakdown_structure = WorkBreakdownStructure.find(params[:id])
+      end
       if @work_breakdown_structure.nil?
         @work_breakdown_structure = WorkBreakdownStructure.new(project: @project) 
       end

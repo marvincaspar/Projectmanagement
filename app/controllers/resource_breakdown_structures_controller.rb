@@ -67,7 +67,9 @@ class ResourceBreakdownStructuresController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_resource_breakdown_structure
-      @resource_breakdown_structure = ResourceBreakdownStructure.find(params[:id])
+      unless params[:id].blank?
+        @resource_breakdown_structure = ResourceBreakdownStructure.find(params[:id])
+      end
       if @resource_breakdown_structure.nil?
         @resource_breakdown_structure = ResourceBreakdownStructure.new(project: @project) 
       end

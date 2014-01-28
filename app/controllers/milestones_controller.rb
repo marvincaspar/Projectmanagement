@@ -36,7 +36,9 @@ class MilestonesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_milestone
-      @milestone = Milestone.where('id = ?', params[:id]).first
+      unless params[:id].blank?
+        @milestone = Milestone.where('id = ?', params[:id]).first
+      end
       if @milestone.nil?
         @milestone = Milestone.new(project: @project) 
       end

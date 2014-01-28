@@ -1,0 +1,35 @@
+<%= form_for([@project, @iteration, @estimation], html: { class: 'form-horizontal' }) do |f| %>
+  <% if @estimation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@estimation.errors.count, "error") %> prohibited this estimation from being saved:</h2>
+
+      <ul>
+      <% @estimation.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <input type="hidden" id="iteration_id" name="iteration_id" />
+  <input type="hidden" id="id" name="id" />
+
+  <div class="form-group">
+    <%= f.label :effort, class: 'col-md-3 control-label' %>
+    <div class="col-md-9">
+      <%= f.text_field :effort, {class: 'form-control', placeholder: 'Schätzung'} %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-9 col-md-offset-3">
+      <i class="message"></i>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-3 col-sm-9">
+      <%= f.submit class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>

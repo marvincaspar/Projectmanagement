@@ -66,7 +66,9 @@ class ProductBreakdownStructuresController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product_breakdown_structure
-      @product_breakdown_structure = ProductBreakdownStructure.find(params[:id])
+      unless params[:id].blank?
+        @product_breakdown_structure = ProductBreakdownStructure.find(params[:id])
+      end
       if @product_breakdown_structure.nil?
         @product_breakdown_structure = ProductBreakdownStructure.new(project: @project) 
       end

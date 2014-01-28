@@ -46,7 +46,9 @@ class ResourcesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_resource
-      @resource = Resource.find(params[:id])
+      unless params[:id].blank?
+        @resource = Resource.find(params[:id])
+      end
       if @resource.nil?
         @resource = Resource.new(project: @project) 
       end

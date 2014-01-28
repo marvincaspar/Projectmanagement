@@ -18,8 +18,9 @@ function initRam() {
   });
 
   jQuery('.ram .glyphicon-pencil').click(function() {
-    var id = jQuery(this).parents('.dd-item').data('id');
-    var show_url = wp_edit_url.replace(':id', id);
+    var id = jQuery(this).parents('.dd-item').data('ram-id');
+    var wp_id = jQuery(this).parents('.dd-item').data('id');
+    var show_url = ram_edit_url.replace(':id', id);
 
     jQuery.ajax({
       type: 'GET',
@@ -28,7 +29,7 @@ function initRam() {
     }).done(function ( data ) {
       jQuery('#wp_show').hide();
       fillForm(data, jQuery('#ram_form'));
-      jQuery('#work_package_id').val(id);
+      jQuery('#work_package_id').val(wp_id);
       jQuery('#ram_form').show();
     }).fail(function ( data ) {
       alert('error');

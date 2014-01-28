@@ -1,0 +1,6 @@
+<% if can? :manage, @project %>
+  <%= render "form_projectowner" %>
+<% else %>
+  <%= render "form_expert" %>
+<% end %>
+<input type="hidden" id="work_package_id" name="work_package_id" />

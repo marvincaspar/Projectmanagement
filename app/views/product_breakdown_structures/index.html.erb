@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-6">
-    <h2>Projektstruktur</h2>
+    <h2>Projektstruktur <%= link_to '', project_product_breakdown_structures_path(params[:project_id], format: :pdf), {class: 'glyphicon glyphicon-download-alt'} %></h2>
     <% if can? :manage, @project => ProductBreakdownStructure %>
       <a class="btn btn-primary btn-sm show_form">Neue Projektstruktur</a>
     <% end %>

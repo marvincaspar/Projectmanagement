@@ -1,0 +1,48 @@
+<%= wicked_pdf_stylesheet_link_tag "application" %>
+<h2>Einsatzmittel</h2>
+<div class="dd">
+  <ul class="dd-list rbs">
+    <% prev_level = 0 %>
+    <% first_turn = true %>
+    <% ResourceBreakdownStructure.order_for_selects(params[:project_id]).each do |r| %>
+      <% if r.level > 0 %>
+        <% if prev_level < r.level && !first_turn %>
+          <ul class="dd-list">
+        <% end %>
+        
+        <% if prev_level > r.level %>
+          </li></ul>
+          <% diff = prev_level - r.level - 1 %>
+          <%= "#{'</li></ul>' * diff} </li>".html_safe %>
+        <% end %>
+
+        <% if prev_level == r.level && !first_turn %>
+          </li>
+        <% end %>
+
+        <li class="dd-item" data-id="<%= r.id %>" data-type="structure">
+          <div class="dd-content">
+            <span class="glyphicon glyphicon-folder-open"></span>&nbsp;
+            <%= r.name %>
+          </div>
+
+          <% if r.resources.count > 0 %>
+            <ul class="dd-list r">
+              <% r.resources.each do |re| %>
+                <li class="dd-item" data-id="<%= re.id %>" data-type="resource">
+                  <div class="dd-content">
+                    <span class="glyphicon glyphicon-user"></span>&nbsp;
+                    <%= re.qualification.name %>
+                  </div>
+                </li>
+              <% end %>
+            </ul>
+          <% end %>
+
+        <% prev_level = r.level %>
+        <% first_turn = false %>
+      <% end %>
+    <% end %>
+    <%= "#{'</li></ul>' * prev_level}".html_safe %>
+  </ul>            
+</div>

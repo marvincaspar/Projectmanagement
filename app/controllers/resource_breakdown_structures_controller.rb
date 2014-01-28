@@ -19,6 +19,15 @@ class ResourceBreakdownStructuresController < ApplicationController
     @resource_breakdown_structure = ResourceBreakdownStructure.new(project: @project)
     @resource = Resource.new(project: @project)
     @qualification = Qualification.new(project: @project)
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "Einsatzmittel",
+               template: "resource_breakdown_structures/index.pdf.erb",
+               encoding: "utf-8"
+      end
+    end
   end
 
   def show

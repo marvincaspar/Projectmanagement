@@ -37,6 +37,9 @@ gem 'paperclip'
 
 gem 'enumerize'
 
+gem 'wkhtmltopdf-binary'
+gem 'wicked_pdf'
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'

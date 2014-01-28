@@ -16,6 +16,15 @@ class ProductBreakdownStructuresController < ApplicationController
   def index
     @project = Project.find(params[:project_id])
     @product_breakdown_structure = ProductBreakdownStructure.new(project: @project)
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "Produktstruktur",
+               template: "product_breakdown_structures/index.pdf.erb",
+               encoding: "utf-8"
+      end
+    end
   end
   
   def show

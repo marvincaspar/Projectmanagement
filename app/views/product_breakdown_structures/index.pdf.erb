@@ -1,0 +1,34 @@
+<%= wicked_pdf_stylesheet_link_tag "application" %>
+<h2>Produktstruktur</h2>
+<div class="dd pbs">
+  <ul class="dd-list">
+    <% prev_level = 0 %>
+    <% first_turn = true %>
+    <% ProductBreakdownStructure.order_for_selects(params[:project_id]).each do |p| %>
+      <% if p.level > 0 %>
+        <% if prev_level < p.level && !first_turn %>
+          <ul class="dd-list">
+        <% end %>
+        
+        <% if prev_level > p.level %>
+          </li></ul>
+          <% diff = prev_level - p.level - 1 %>
+          <%= "#{'</li></ul>' * diff} </li>".html_safe %>
+        <% end %>
+
+        <% if prev_level == p.level && !first_turn %>
+          </li>
+        <% end %>
+
+        <li class="dd-item" data-id="<%= p.id %>" data-type="structure">
+          <div class="dd-content">
+            <%= p.name %>
+          </div>
+
+        <% prev_level = p.level %>
+        <% first_turn = false %>
+      <% end %>
+    <% end %>
+    <%= "#{'</li></ul>' * prev_level}".html_safe %>
+  </ul>            
+</div>

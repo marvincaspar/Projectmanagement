@@ -71,6 +71,9 @@ function ready() {
     else if(jQuery(this).hasClass('glyphicon-time')) {
       tooltip = 'Aufwand';
     }
+    else if(jQuery(this).hasClass('glyphicon-download-alt')) {
+      tooltip = 'Download';
+    }
     jQuery(this).data('toggle', 'tooltip').attr('title', tooltip);
   });
 

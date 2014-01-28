@@ -18,6 +18,15 @@ class WorkBreakdownStructuresController < ApplicationController
     @project = Project.find(params[:project_id])
     @work_breakdown_structure = WorkBreakdownStructure.new(project: @project)
     @work_package = WorkPackage.new(project: @project)
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "Arbeitspakete",
+               template: "work_breakdown_structures/index.pdf.erb",
+               encoding: "utf-8"
+      end
+    end
   end
 
   def show

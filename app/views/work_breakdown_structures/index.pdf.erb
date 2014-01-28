@@ -1,0 +1,48 @@
+<%= wicked_pdf_stylesheet_link_tag "application" %>
+<h2>Arbeitspakete</h2>
+<div class="dd">
+  <ul class="dd-list wbs">
+    <% prev_level = 0 %>
+    <% first_turn = true %>
+    <% WorkBreakdownStructure.order_for_selects(params[:project_id]).each do |p| %>
+      <% if p.level > 0 %>
+        <% if prev_level < p.level && !first_turn %>
+          <ul class="dd-list">
+        <% end %>
+        
+        <% if prev_level > p.level %>
+          </li></ul>
+          <% diff = prev_level - p.level - 1 %>
+          <%= "#{'</li></ul>' * diff} </li>".html_safe %>
+        <% end %>
+
+        <% if prev_level == p.level && !first_turn %>
+          </li>
+        <% end %>
+
+        <li class="dd-item" data-id="<%= p.id %>" data-type="structure">
+          <div class="dd-content">
+            <span class="glyphicon glyphicon-folder-open"></span>&nbsp;
+            <%= p.name %>
+          </div>
+
+          <% if p.work_packages.count > 0 %>
+            <ul class="dd-list wp">
+              <% p.work_packages.each do |wp| %>
+                <li class="dd-item" data-id="<%= wp.id %>" data-type="package">
+                  <div class="dd-content">
+                    <span class="glyphicon glyphicon-file"></span>&nbsp;
+                    <%= wp.name %>
+                  </div>
+                </li>
+              <% end %>
+            </ul>
+          <% end %>
+
+        <% prev_level = p.level %>
+        <% first_turn = false %>
+      <% end %>
+    <% end %>
+    <%= "#{'</li></ul>' * prev_level}".html_safe %>
+  </ul>            
+</div>

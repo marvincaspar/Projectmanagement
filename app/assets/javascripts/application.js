@@ -14,7 +14,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap
-//= require jquery.ui.all
+//= require jquery.ui.datepicker
 //= require jquery-sortable
 //= require jquery.jOrgChart
 //= require jquery.nestable
@@ -53,6 +53,28 @@ function ready() {
   });
    
   jQuery("div.thumbnail").height(maxheight + 43);
+
+  jQuery('.glyphicon').each(function() {
+    var tooltip = '';
+    if(jQuery(this).hasClass('glyphicon-eye-open')) {
+      tooltip = 'Anzeigen';
+    } 
+    else if(jQuery(this).hasClass('glyphicon-trash')) {
+      tooltip = 'Löschen';
+    }
+    else if(jQuery(this).hasClass('glyphicon-pencil')) {
+      tooltip = 'Bearbeiten';
+    }
+    else if(jQuery(this).hasClass('glyphicon-plus-sign')) {
+      tooltip = 'Neu';
+    }
+    else if(jQuery(this).hasClass('glyphicon-time')) {
+      tooltip = 'Aufwand';
+    }
+    jQuery(this).data('toggle', 'tooltip').attr('title', tooltip);
+  });
+
+  jQuery('.glyphicon').tooltip();
 
   initProject();
   initPbs();

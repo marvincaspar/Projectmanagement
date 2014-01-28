@@ -47,6 +47,13 @@ function ready() {
     right   : 0,
   });
 
+  var maxheight = 0;
+  jQuery("div.thumbnail").each(function(){
+    if(jQuery(this).height() > maxheight) { maxheight = jQuery(this).height(); }
+  });
+   
+  jQuery("div.thumbnail").height(maxheight + 43);
+
   initProject();
   initPbs();
   initWbs();

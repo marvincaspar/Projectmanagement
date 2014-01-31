@@ -63,9 +63,14 @@ class ResourceBreakdownStructuresController < ApplicationController
   end
 
   def destroy
-    @resource_breakdown_structure.resources.each do |r|
-      r.destroy
+    childs = find_childs(@resource_breakdown_structure.id)
+    childs.each do |c|
+      c.resources.each do |r|
+        r.destroy
+      end
+      c.destroy
     end
+    
     @resource_breakdown_structure.destroy
     respond_to do |format|
       format.html { redirect_to project_resource_breakdown_structures_path }
@@ -87,5 +92,16 @@ class ResourceBreakdownStructuresController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def resource_breakdown_structure_params
       params.require(:resource_breakdown_structure).permit(:name, :resource_type, :role, :count, :qualification_id, :amount, :parent, :level, :project_id)
+    end
+
+    # find all the childs to avoid dead entries
+    def find_childs(parent)
+      ret = []
+      el = ResourceBreakdownStructure.where('parent = ?', parent)
+      el.each do |e|
+        ret << e
+        ret += find_childs(e.id) 
+      end
+      ret
     end
 end

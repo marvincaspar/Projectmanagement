@@ -40,6 +40,15 @@ pbs_tuer = ProductBreakdownStructure.create name: 'Tür', level: pbs_karosserie.
 
 pbs_motorblock = ProductBreakdownStructure.create name: 'Motorblock', level: pbs_antriebskomplex.level + 1, parent: pbs_antriebskomplex.id, order: 0, user: user1, project: auto
 pbs_getriebe = ProductBreakdownStructure.create name: 'Getriebe', level: pbs_antriebskomplex.level + 1, parent: pbs_antriebskomplex.id, order: 0, user: user1, project: auto
+pbs_differential = ProductBreakdownStructure.create name: 'Differential', level: pbs_antriebskomplex.level + 1, parent: pbs_antriebskomplex.id, order: 0, user: user1, project: auto
+
+pbs_motorgehause = ProductBreakdownStructure.create name: 'Motorgehäuse', level: pbs_motorblock.level + 1, parent: pbs_motorblock.id, order: 0, user: user1, project: auto
+pbs_kurbeltrieb = ProductBreakdownStructure.create name: 'Kurbeltrieb', level: pbs_motorblock.level + 1, parent: pbs_motorblock.id, order: 0, user: user1, project: auto
+pbs_nebenaggregate = ProductBreakdownStructure.create name: 'Nebenaggregate', level: pbs_motorblock.level + 1, parent: pbs_motorblock.id, order: 0, user: user1, project: auto
+
+pbs_pleuelstangen = ProductBreakdownStructure.create name: 'Pleuelstangen', level: pbs_kurbeltrieb.level + 1, parent: pbs_kurbeltrieb.id, order: 0, user: user1, project: auto
+pbs_kurbelwelle = ProductBreakdownStructure.create name: 'Kurbelwelle', level: pbs_kurbeltrieb.level + 1, parent: pbs_kurbeltrieb.id, order: 0, user: user1, project: auto
+pbs_kolben = ProductBreakdownStructure.create name: 'Kolben', level: pbs_kurbeltrieb.level + 1, parent: pbs_kurbeltrieb.id, order: 0, user: user1, project: auto
 
 pbs_vorderachse = ProductBreakdownStructure.create name: 'Vorderachse', level: pbs_fahrgestell.level + 1, parent: pbs_fahrgestell.id, order: 0, user: user1, project: auto
 pbs_hinterachse = ProductBreakdownStructure.create name: 'Hinterachse', level: pbs_fahrgestell.level + 1, parent: pbs_fahrgestell.id, order: 0, user: user1, project: auto
@@ -48,6 +57,39 @@ pbs_rad1 = ProductBreakdownStructure.create name: 'Rad #1', level: pbs_vorderach
 pbs_rad2 = ProductBreakdownStructure.create name: 'Rad #2', level: pbs_vorderachse.level + 1, parent: pbs_vorderachse.id, order: 0, user: user1, project: auto
 pbs_rad3 = ProductBreakdownStructure.create name: 'Rad #3', level: pbs_hinterachse.level + 1, parent: pbs_hinterachse.id, order: 0, user: user1, project: auto
 pbs_rad4 = ProductBreakdownStructure.create name: 'Rad #4', level: pbs_hinterachse.level + 1, parent: pbs_hinterachse.id, order: 0, user: user1, project: auto
+
+pbs_bremse1 = ProductBreakdownStructure.create name: 'Bremse #1', level: pbs_vorderachse.level + 1, parent: pbs_vorderachse.id, order: 0, user: user1, project: auto
+pbs_bremse2 = ProductBreakdownStructure.create name: 'Bremse #2', level: pbs_vorderachse.level + 1, parent: pbs_vorderachse.id, order: 0, user: user1, project: auto
+pbs_bremse3 = ProductBreakdownStructure.create name: 'Bremse #3', level: pbs_hinterachse.level + 1, parent: pbs_hinterachse.id, order: 0, user: user1, project: auto
+pbs_bremse4 = ProductBreakdownStructure.create name: 'Bremse #4', level: pbs_hinterachse.level + 1, parent: pbs_hinterachse.id, order: 0, user: user1, project: auto
+
+pbs_bremsscheibe1 = ProductBreakdownStructure.create name: 'Bremsscheibe #1', level: pbs_bremse1.level + 1, parent: pbs_bremse1.id, order: 0, user: user1, project: auto
+pbs_bremsbelage1 = ProductBreakdownStructure.create name: 'Bremsbeläge #1', level: pbs_bremse1.level + 1, parent: pbs_bremse1.id, order: 0, user: user1, project: auto
+pbs_bremshalter1 = ProductBreakdownStructure.create name: 'Bremshalter #1', level: pbs_bremse1.level + 1, parent: pbs_bremse1.id, order: 0, user: user1, project: auto
+pbs_bremszylinder1 = ProductBreakdownStructure.create name: 'Bremszylinder #1', level: pbs_bremse1.level + 1, parent: pbs_bremse1.id, order: 0, user: user1, project: auto
+pbs_bremskolben1 = ProductBreakdownStructure.create name: 'Bremskolben #1', level: pbs_bremse1.level + 1, parent: pbs_bremse1.id, order: 0, user: user1, project: auto
+pbs_bremsrahmen1 = ProductBreakdownStructure.create name: 'Bremsrahmen #1', level: pbs_bremse1.level + 1, parent: pbs_bremse1.id, order: 0, user: user1, project: auto
+
+pbs_bremsscheibe1 = ProductBreakdownStructure.create name: 'Bremsscheibe #1', level: pbs_bremse2.level + 1, parent: pbs_bremse2.id, order: 0, user: user1, project: auto
+pbs_bremsbelage1 = ProductBreakdownStructure.create name: 'Bremsbeläge #1', level: pbs_bremse2.level + 1, parent: pbs_bremse2.id, order: 0, user: user1, project: auto
+pbs_bremshalter1 = ProductBreakdownStructure.create name: 'Bremshalter #1', level: pbs_bremse2.level + 1, parent: pbs_bremse2.id, order: 0, user: user1, project: auto
+pbs_bremszylinder1 = ProductBreakdownStructure.create name: 'Bremszylinder #1', level: pbs_bremse2.level + 1, parent: pbs_bremse2.id, order: 0, user: user1, project: auto
+pbs_bremskolben1 = ProductBreakdownStructure.create name: 'Bremskolben #1', level: pbs_bremse2.level + 1, parent: pbs_bremse2.id, order: 0, user: user1, project: auto
+pbs_bremsrahmen1 = ProductBreakdownStructure.create name: 'Bremsrahmen #1', level: pbs_bremse2.level + 1, parent: pbs_bremse2.id, order: 0, user: user1, project: auto
+
+pbs_bremsscheibe1 = ProductBreakdownStructure.create name: 'Bremsscheibe #1', level: pbs_bremse3.level + 1, parent: pbs_bremse3.id, order: 0, user: user1, project: auto
+pbs_bremsbelage1 = ProductBreakdownStructure.create name: 'Bremsbeläge #1', level: pbs_bremse3.level + 1, parent: pbs_bremse3.id, order: 0, user: user1, project: auto
+pbs_bremshalter1 = ProductBreakdownStructure.create name: 'Bremshalter #1', level: pbs_bremse3.level + 1, parent: pbs_bremse3.id, order: 0, user: user1, project: auto
+pbs_bremszylinder1 = ProductBreakdownStructure.create name: 'Bremszylinder #1', level: pbs_bremse3.level + 1, parent: pbs_bremse3.id, order: 0, user: user1, project: auto
+pbs_bremskolben1 = ProductBreakdownStructure.create name: 'Bremskolben #1', level: pbs_bremse3.level + 1, parent: pbs_bremse3.id, order: 0, user: user1, project: auto
+pbs_bremsrahmen1 = ProductBreakdownStructure.create name: 'Bremsrahmen #1', level: pbs_bremse3.level + 1, parent: pbs_bremse3.id, order: 0, user: user1, project: auto
+
+pbs_bremsscheibe1 = ProductBreakdownStructure.create name: 'Bremsscheibe #1', level: pbs_bremse4.level + 1, parent: pbs_bremse4.id, order: 0, user: user1, project: auto
+pbs_bremsbelage1 = ProductBreakdownStructure.create name: 'Bremsbeläge #1', level: pbs_bremse4.level + 1, parent: pbs_bremse4.id, order: 0, user: user1, project: auto
+pbs_bremshalter1 = ProductBreakdownStructure.create name: 'Bremshalter #1', level: pbs_bremse4.level + 1, parent: pbs_bremse4.id, order: 0, user: user1, project: auto
+pbs_bremszylinder1 = ProductBreakdownStructure.create name: 'Bremszylinder #1', level: pbs_bremse4.level + 1, parent: pbs_bremse4.id, order: 0, user: user1, project: auto
+pbs_bremskolben1 = ProductBreakdownStructure.create name: 'Bremskolben #1', level: pbs_bremse4.level + 1, parent: pbs_bremse4.id, order: 0, user: user1, project: auto
+pbs_bremsrahmen1 = ProductBreakdownStructure.create name: 'Bremsrahmen #1', level: pbs_bremse4.level + 1, parent: pbs_bremse4.id, order: 0, user: user1, project: auto
 
 pbs_reifen1 = ProductBreakdownStructure.create name: 'Reifen #1', level: pbs_rad1.level + 1, parent: pbs_rad1.id, order: 0, user: user1, project: auto
 pbs_felge1 = ProductBreakdownStructure.create name: 'Felge #1', level: pbs_rad1.level + 1, parent: pbs_rad1.id, order: 0, user: user1, project: auto
@@ -76,6 +118,15 @@ wbs_tuer = WorkBreakdownStructure.create name: 'Tür', level: wbs_karosserie.lev
 
 wbs_motorblock = WorkBreakdownStructure.create name: 'Motorblock', level: wbs_antriebskomplex.level + 1, parent: wbs_antriebskomplex.id, order: 0, user: user1, project: auto
 wbs_getriebe = WorkBreakdownStructure.create name: 'Getriebe', level: wbs_antriebskomplex.level + 1, parent: wbs_antriebskomplex.id, order: 0, user: user1, project: auto
+wbs_differential = WorkBreakdownStructure.create name: 'Differential', level: wbs_antriebskomplex.level + 1, parent: wbs_antriebskomplex.id, order: 0, user: user1, project: auto
+
+wbs_motorgehause = WorkBreakdownStructure.create name: 'Motorgehäuse', level: wbs_motorblock.level + 1, parent: wbs_motorblock.id, order: 0, user: user1, project: auto
+wbs_kurbeltrieb = WorkBreakdownStructure.create name: 'Kurbeltrieb', level: wbs_motorblock.level + 1, parent: wbs_motorblock.id, order: 0, user: user1, project: auto
+wbs_nebenaggregate = WorkBreakdownStructure.create name: 'Nebenaggregate', level: wbs_motorblock.level + 1, parent: wbs_motorblock.id, order: 0, user: user1, project: auto
+
+wbs_pleuelstangen = WorkBreakdownStructure.create name: 'Pleuelstangen', level: wbs_kurbeltrieb.level + 1, parent: wbs_kurbeltrieb.id, order: 0, user: user1, project: auto
+wbs_kurbelwelle = WorkBreakdownStructure.create name: 'Kurbelwelle', level: wbs_kurbeltrieb.level + 1, parent: wbs_kurbeltrieb.id, order: 0, user: user1, project: auto
+wbs_kolben = WorkBreakdownStructure.create name: 'Kolben', level: wbs_kurbeltrieb.level + 1, parent: wbs_kurbeltrieb.id, order: 0, user: user1, project: auto
 
 wbs_vorderachse = WorkBreakdownStructure.create name: 'Vorderachse', level: wbs_fahrgestell.level + 1, parent: wbs_fahrgestell.id, order: 0, user: user1, project: auto
 wbs_hinterachse = WorkBreakdownStructure.create name: 'Hinterachse', level: wbs_fahrgestell.level + 1, parent: wbs_fahrgestell.id, order: 0, user: user1, project: auto
@@ -84,6 +135,39 @@ wbs_rad1 = WorkBreakdownStructure.create name: 'Rad #1', level: wbs_vorderachse.
 wbs_rad2 = WorkBreakdownStructure.create name: 'Rad #2', level: wbs_vorderachse.level + 1, parent: wbs_vorderachse.id, order: 0, user: user1, project: auto
 wbs_rad3 = WorkBreakdownStructure.create name: 'Rad #3', level: wbs_hinterachse.level + 1, parent: wbs_hinterachse.id, order: 0, user: user1, project: auto
 wbs_rad4 = WorkBreakdownStructure.create name: 'Rad #4', level: wbs_hinterachse.level + 1, parent: wbs_hinterachse.id, order: 0, user: user1, project: auto
+
+wbs_bremse1 = WorkBreakdownStructure.create name: 'Bremse #1', level: wbs_vorderachse.level + 1, parent: wbs_vorderachse.id, order: 0, user: user1, project: auto
+wbs_bremse2 = WorkBreakdownStructure.create name: 'Bremse #2', level: wbs_vorderachse.level + 1, parent: wbs_vorderachse.id, order: 0, user: user1, project: auto
+wbs_bremse3 = WorkBreakdownStructure.create name: 'Bremse #3', level: wbs_hinterachse.level + 1, parent: wbs_hinterachse.id, order: 0, user: user1, project: auto
+wbs_bremse4 = WorkBreakdownStructure.create name: 'Bremse #4', level: wbs_hinterachse.level + 1, parent: wbs_hinterachse.id, order: 0, user: user1, project: auto
+
+wbs_bremsscheibe1 = WorkBreakdownStructure.create name: 'Bremsscheibe #1', level: wbs_bremse1.level + 1, parent: wbs_bremse1.id, order: 0, user: user1, project: auto
+wbs_bremsbelage1 = WorkBreakdownStructure.create name: 'Bremsbeläge #1', level: wbs_bremse1.level + 1, parent: wbs_bremse1.id, order: 0, user: user1, project: auto
+wbs_bremshalter1 = WorkBreakdownStructure.create name: 'Bremshalter #1', level: wbs_bremse1.level + 1, parent: wbs_bremse1.id, order: 0, user: user1, project: auto
+wbs_bremszylinder1 = WorkBreakdownStructure.create name: 'Bremszylinder #1', level: wbs_bremse1.level + 1, parent: wbs_bremse1.id, order: 0, user: user1, project: auto
+wbs_bremskolben1 = WorkBreakdownStructure.create name: 'Bremskolben #1', level: wbs_bremse1.level + 1, parent: wbs_bremse1.id, order: 0, user: user1, project: auto
+wbs_bremsrahmen1 = WorkBreakdownStructure.create name: 'Bremsrahmen #1', level: wbs_bremse1.level + 1, parent: wbs_bremse1.id, order: 0, user: user1, project: auto
+
+wbs_bremsscheibe1 = WorkBreakdownStructure.create name: 'Bremsscheibe #1', level: wbs_bremse2.level + 1, parent: wbs_bremse2.id, order: 0, user: user1, project: auto
+wbs_bremsbelage1 = WorkBreakdownStructure.create name: 'Bremsbeläge #1', level: wbs_bremse2.level + 1, parent: wbs_bremse2.id, order: 0, user: user1, project: auto
+wbs_bremshalter1 = WorkBreakdownStructure.create name: 'Bremshalter #1', level: wbs_bremse2.level + 1, parent: wbs_bremse2.id, order: 0, user: user1, project: auto
+wbs_bremszylinder1 = WorkBreakdownStructure.create name: 'Bremszylinder #1', level: wbs_bremse2.level + 1, parent: wbs_bremse2.id, order: 0, user: user1, project: auto
+wbs_bremskolben1 = WorkBreakdownStructure.create name: 'Bremskolben #1', level: wbs_bremse2.level + 1, parent: wbs_bremse2.id, order: 0, user: user1, project: auto
+wbs_bremsrahmen1 = WorkBreakdownStructure.create name: 'Bremsrahmen #1', level: wbs_bremse2.level + 1, parent: wbs_bremse2.id, order: 0, user: user1, project: auto
+
+wbs_bremsscheibe1 = WorkBreakdownStructure.create name: 'Bremsscheibe #1', level: wbs_bremse3.level + 1, parent: wbs_bremse3.id, order: 0, user: user1, project: auto
+wbs_bremsbelage1 = WorkBreakdownStructure.create name: 'Bremsbeläge #1', level: wbs_bremse3.level + 1, parent: wbs_bremse3.id, order: 0, user: user1, project: auto
+wbs_bremshalter1 = WorkBreakdownStructure.create name: 'Bremshalter #1', level: wbs_bremse3.level + 1, parent: wbs_bremse3.id, order: 0, user: user1, project: auto
+wbs_bremszylinder1 = WorkBreakdownStructure.create name: 'Bremszylinder #1', level: wbs_bremse3.level + 1, parent: wbs_bremse3.id, order: 0, user: user1, project: auto
+wbs_bremskolben1 = WorkBreakdownStructure.create name: 'Bremskolben #1', level: wbs_bremse3.level + 1, parent: wbs_bremse3.id, order: 0, user: user1, project: auto
+wbs_bremsrahmen1 = WorkBreakdownStructure.create name: 'Bremsrahmen #1', level: wbs_bremse3.level + 1, parent: wbs_bremse3.id, order: 0, user: user1, project: auto
+
+wbs_bremsscheibe1 = WorkBreakdownStructure.create name: 'Bremsscheibe #1', level: wbs_bremse4.level + 1, parent: wbs_bremse4.id, order: 0, user: user1, project: auto
+wbs_bremsbelage1 = WorkBreakdownStructure.create name: 'Bremsbeläge #1', level: wbs_bremse4.level + 1, parent: wbs_bremse4.id, order: 0, user: user1, project: auto
+wbs_bremshalter1 = WorkBreakdownStructure.create name: 'Bremshalter #1', level: wbs_bremse4.level + 1, parent: wbs_bremse4.id, order: 0, user: user1, project: auto
+wbs_bremszylinder1 = WorkBreakdownStructure.create name: 'Bremszylinder #1', level: wbs_bremse4.level + 1, parent: wbs_bremse4.id, order: 0, user: user1, project: auto
+wbs_bremskolben1 = WorkBreakdownStructure.create name: 'Bremskolben #1', level: wbs_bremse4.level + 1, parent: wbs_bremse4.id, order: 0, user: user1, project: auto
+wbs_bremsrahmen1 = WorkBreakdownStructure.create name: 'Bremsrahmen #1', level: wbs_bremse4.level + 1, parent: wbs_bremse4.id, order: 0, user: user1, project: auto
 
 wbs_reifen1 = WorkBreakdownStructure.create name: 'Reifen #1', level: wbs_rad1.level + 1, parent: wbs_rad1.id, order: 0, user: user1, project: auto
 wbs_felge1 = WorkBreakdownStructure.create name: 'Felge #1', level: wbs_rad1.level + 1, parent: wbs_rad1.id, order: 0, user: user1, project: auto
@@ -232,26 +316,6 @@ dcoc400 = Qualification.create name: 'Level 400 Data Center Ops Certificate', ex
 puts " done"
 
 
-# print "Create Resource Breakdown Structure"
-# # ============ Resource Breakdown Structure ============
-# rbs = ResourceBreakdownStructure.create resource_type: :personal_intern, role: "Projektleiter", qualification: pmp, count: 1, amount: 100, project: auto
-# rbs = ResourceBreakdownStructure.create resource_type: :personal_intern, role: "Projektcontroller", qualification: pmc, count: 1, amount: 100, project: auto
-# rbs = ResourceBreakdownStructure.create resource_type: :personal_intern, role: "Geschäftsanalytiker", qualification: bac, count: 1, amount: 100, project: auto
-# rbs = ResourceBreakdownStructure.create resource_type: :personal_intern, role: "Systemanalytiker", qualification: sac, count: 1, amount: 100, project: auto
-
-# rbs = ResourceBreakdownStructure.create resource_type: :personal_extern, role: "Entwicklungsleiter", qualification: sec400, count: 1, amount: 100, project: auto
-# rbs = ResourceBreakdownStructure.create resource_type: :personal_extern, role: "Technischer Architekt", qualification: sec400, count: 1, amount: 100, project: auto
-# rbs = ResourceBreakdownStructure.create resource_type: :personal_extern, role: "Datenbankentwickler", qualification: dec200, count: 2, amount: 100, project: auto
-# rbs = ResourceBreakdownStructure.create resource_type: :personal_extern, role: "Datenbankentwickler", qualification: dec300, count: 2, amount: 100, project: auto
-# rbs = ResourceBreakdownStructure.create resource_type: :personal_extern, role: "Sofwareentwickler", qualification: sec200, count: 1, amount: 100, project: auto
-# rbs = ResourceBreakdownStructure.create resource_type: :personal_extern, role: "Sofwareentwickler", qualification: sec300, count: 3, amount: 100, project: auto
-# rbs = ResourceBreakdownStructure.create resource_type: :personal_extern, role: "Sofwareentwickler", qualification: sec300, count: 3, amount: 100, project: auto
-# rbs = ResourceBreakdownStructure.create resource_type: :personal_extern, role: "Netzwerkentwickler", qualification: nac200, count: 1, amount: 100, project: auto
-# rbs = ResourceBreakdownStructure.create resource_type: :personal_extern, role: "Netzwerkentwickler", qualification: nac300, count: 1, amount: 100, project: auto
-# rbs = ResourceBreakdownStructure.create resource_type: :personal_extern, role: "Operator", qualification: dcoc300, count: 1, amount: 100, project: auto
-# rbs = ResourceBreakdownStructure.create resource_type: :personal_extern, role: "Operator", qualification: dcoc400, count: 1, amount: 100, project: auto
-# puts " done"
-
 print "Create Resource Breakdown Structure"
 # ============ Resource Breakdown Structure ============
 ResourceBreakdownStructure.create name: project1.name, level: 0, parent: 0, order: 0, user: user1, resource: :personal, resource_type: :intern, project: project1
@@ -263,13 +327,15 @@ rbs2 = ResourceBreakdownStructure.create name: "Projektcontroller", level: rbs_p
 rbs3 = ResourceBreakdownStructure.create name: "Geschäftsanalytiker", level: rbs_pkw.level + 1, parent: rbs_pkw.id, order: 0, user: user1, resource: :personal, resource_type: :intern, project: auto
 rbs4 = ResourceBreakdownStructure.create name: "Systemanalytiker", level: rbs_pkw.level + 1, parent: rbs_pkw.id, order: 0, user: user1, resource: :personal, resource_type: :intern, project: auto
 
-rbs5 = ResourceBreakdownStructure.create name: "Entwicklungsleiter", level: rbs_pkw.level + 1, parent: rbs_pkw.id, order: 0, user: user1, resource: :personal, resource_type: :extern, project: auto
-rbs6 = ResourceBreakdownStructure.create name: "Technischer Architekt", level: rbs_pkw.level + 1, parent: rbs_pkw.id, order: 0, user: user1, resource: :personal, resource_type: :extern, project: auto
-rbs7 = ResourceBreakdownStructure.create name: "Datenbankentwickler", level: rbs_pkw.level + 1, parent: rbs_pkw.id, order: 0, user: user1, resource: :personal, resource_type: :extern, project: auto
-rbs8 = ResourceBreakdownStructure.create name: "Sofwareentwickler", level: rbs_pkw.level + 1, parent: rbs_pkw.id, order: 0, user: user1, resource: :personal, resource_type: :extern, project: auto
-rbs9 = ResourceBreakdownStructure.create name: "Netzwerkentwickler", level: rbs_pkw.level + 1, parent: rbs_pkw.id, order: 0, user: user1, resource: :personal, resource_type: :extern, project: auto
-rbs10 = ResourceBreakdownStructure.create name: "Operator", level: rbs_pkw.level + 1, parent: rbs_pkw.id, order: 0, user: user1, resource: :personal, resource_type: :extern, project: auto
+rbs5 = ResourceBreakdownStructure.create name: "Mechaniker", level: rbs_pkw.level + 1, parent: rbs_pkw.id, order: 0, user: user1, resource: :personal, resource_type: :extern, project: auto
+rbs6 = ResourceBreakdownStructure.create name: "Elektroniker", level: rbs_pkw.level + 1, parent: rbs_pkw.id, order: 0, user: user1, resource: :personal, resource_type: :extern, project: auto
+rbs7 = ResourceBreakdownStructure.create name: "Mechatroniker", level: rbs_pkw.level + 1, parent: rbs_pkw.id, order: 0, user: user1, resource: :personal, resource_type: :extern, project: auto
+rbs8 = ResourceBreakdownStructure.create name: "Fahrzeugbauer", level: rbs_pkw.level + 1, parent: rbs_pkw.id, order: 0, user: user1, resource: :personal, resource_type: :extern, project: auto
+rbs9 = ResourceBreakdownStructure.create name: "Schichtleiter", level: rbs_pkw.level + 1, parent: rbs_pkw.id, order: 0, user: user1, resource: :personal, resource_type: :extern, project: auto
+rbs10 = ResourceBreakdownStructure.create name: "Fließband", level: rbs_pkw.level + 1, parent: rbs_pkw.id, order: 0, user: user1, resource: :personal, resource_type: :extern, project: auto
+rbs11 = ResourceBreakdownStructure.create name: "Roboter", level: rbs_pkw.level + 1, parent: rbs_pkw.id, order: 0, user: user1, resource: :personal, resource_type: :extern, project: auto
 puts " done"
+
 
 print "Create Resource"
 # ============ Resource ============

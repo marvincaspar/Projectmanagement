@@ -304,15 +304,21 @@ pmp = Qualification.create name: 'PMP', experience: '> 3 Jahre Projektleiter', u
 pmc = Qualification.create name: 'Project Management Certificate', experience: 'Junior', user: user1, project: auto
 bac = Qualification.create name: 'Business Analyst Certificate', experience: '> 3 Jahre Product Manager', user: user1, project: auto
 sac = Qualification.create name: 'System Analyst Certificate', experience: '> 3 Jahre Software Engineering', user: user1, project: auto
-sec200 = Qualification.create name: 'Level 200 Software Engineer Certificate', experience: '', user: user1, project: auto
-sec300 = Qualification.create name: 'Level 300 Software Engineer Certificate', experience: '> 3 Jahre', user: user1, project: auto
-sec400 = Qualification.create name: 'Level 400 Software Engineer Certificate', experience: '> 6 Jahre', user: user1, project: auto
-dec200 = Qualification.create name: 'Level 200 Database Engineer Certificate', experience: '', user: user1, project: auto
-dec300 = Qualification.create name: 'Level 300 Database Engineer Certificate', experience: '> 3 Jahre', user: user1, project: auto
-nac200 = Qualification.create name: 'Level 200 Network Admin Certificate', experience: '', user: user1, project: auto
-nac300 = Qualification.create name: 'Level 300 Network Admin Certificate', experience: '> 3 Jahre', user: user1, project: auto
-dcoc300 = Qualification.create name: 'Level 300 Data Center Ops Certificate', experience: '> 3 Jahre', user: user1, project: auto
-dcoc400 = Qualification.create name: 'Level 400 Data Center Ops Certificate', experience: '> 6 Jahre', user: user1, project: auto
+sec200 = Qualification.create name: 'Level 200 Mechaniker Certificate', experience: '', user: user1, project: auto
+sec300 = Qualification.create name: 'Level 300 Mechaniker Certificate', experience: '> 3 Jahre', user: user1, project: auto
+sec400 = Qualification.create name: 'Level 400 Mechaniker Certificate', experience: '> 6 Jahre', user: user1, project: auto
+dec200 = Qualification.create name: 'Level 200 Elektroniker Certificate', experience: '', user: user1, project: auto
+dec300 = Qualification.create name: 'Level 300 Elektroniker Certificate', experience: '> 3 Jahre', user: user1, project: auto
+nac200 = Qualification.create name: 'Level 200 Mechatroniker Certificate', experience: '', user: user1, project: auto
+nac300 = Qualification.create name: 'Level 300 Mechatroniker Certificate', experience: '> 3 Jahre', user: user1, project: auto
+fb300 = Qualification.create name: 'Level 300 Fahrzeugbauer Certificate', experience: '> 3 Jahre', user: user1, project: auto
+fb400 = Qualification.create name: 'Level 400 Fahrzeugbauer Certificate', experience: '> 6 Jahre', user: user1, project: auto
+dcoc300 = Qualification.create name: 'Level 300 Schichtleiter Certificate', experience: '> 3 Jahre', user: user1, project: auto
+dcoc400 = Qualification.create name: 'Level 400 Schichtleiter Certificate', experience: '> 6 Jahre', user: user1, project: auto
+band300 = Qualification.create name: '300Stk/h', experience: '', user: user1, project: auto
+band400 = Qualification.create name: '400stk/h', experience: '', user: user1, project: auto
+rob1 = Qualification.create name: 'Roboter #1', experience: '', user: user1, project: auto
+rob2 = Qualification.create name: 'Roboter #2', experience: '', user: user1, project: auto
 puts " done"
 
 
@@ -344,16 +350,17 @@ Resource.create qualification: pmc, resource_breakdown_structure: rbs2, count: 1
 Resource.create qualification: bac, resource_breakdown_structure: rbs3, count: 1, amount: 100, user: user1, project: auto
 Resource.create qualification: sac, resource_breakdown_structure: rbs4, count: 1, amount: 100, user: user1, project: auto
 Resource.create qualification: sec400, resource_breakdown_structure: rbs5, count: 1, amount: 100, user: user1, project: auto
-Resource.create qualification: sec400, resource_breakdown_structure: rbs6, count: 1, amount: 100, user: user1, project: auto
-Resource.create qualification: dec200, resource_breakdown_structure: rbs7, count: 1, amount: 100, user: user1, project: auto
-Resource.create qualification: dec300, resource_breakdown_structure: rbs7, count: 1, amount: 100, user: user1, project: auto
-Resource.create qualification: sec200, resource_breakdown_structure: rbs8, count: 1, amount: 100, user: user1, project: auto
-Resource.create qualification: sec300, resource_breakdown_structure: rbs8, count: 1, amount: 100, user: user1, project: auto
-Resource.create qualification: sec400, resource_breakdown_structure: rbs8, count: 1, amount: 100, user: user1, project: auto
-Resource.create qualification: nac200, resource_breakdown_structure: rbs9, count: 1, amount: 100, user: user1, project: auto
-Resource.create qualification: nac300, resource_breakdown_structure: rbs9, count: 1, amount: 100, user: user1, project: auto
-Resource.create qualification: dcoc300, resource_breakdown_structure: rbs10, count: 1, amount: 100, user: user1, project: auto
-Resource.create qualification: dcoc400, resource_breakdown_structure: rbs10, count: 1, amount: 100, user: user1, project: auto
+Resource.create qualification: dec300, resource_breakdown_structure: rbs6, count: 1, amount: 100, user: user1, project: auto
+Resource.create qualification: nac200, resource_breakdown_structure: rbs7, count: 1, amount: 100, user: user1, project: auto
+Resource.create qualification: nac300, resource_breakdown_structure: rbs7, count: 1, amount: 100, user: user1, project: auto
+Resource.create qualification: fb400, resource_breakdown_structure: rbs8, count: 1, amount: 100, user: user1, project: auto
+Resource.create qualification: fb300, resource_breakdown_structure: rbs8, count: 1, amount: 100, user: user1, project: auto
+Resource.create qualification: dcoc300, resource_breakdown_structure: rbs9, count: 1, amount: 100, user: user1, project: auto
+Resource.create qualification: dcoc400, resource_breakdown_structure: rbs9, count: 1, amount: 100, user: user1, project: auto
+Resource.create qualification: band300, resource_breakdown_structure: rbs10, count: 1, amount: 100, user: user1, project: auto
+Resource.create qualification: band400, resource_breakdown_structure: rbs10, count: 1, amount: 100, user: user1, project: auto
+Resource.create qualification: rob1, resource_breakdown_structure: rbs11, count: 1, amount: 100, user: user1, project: auto
+Resource.create qualification: rob2, resource_breakdown_structure: rbs11, count: 1, amount: 100, user: user1, project: auto
 puts " done"
 
 print "Create Milestone"
